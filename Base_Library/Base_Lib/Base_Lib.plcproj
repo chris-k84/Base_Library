@@ -51,19 +51,12 @@
     <Compile Include="Base Types\Task_Base\TaskBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="XtsRunner\I_ObjectRunner.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="XtsRunner\ObjectRunner.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base Types" />
     <Folder Include="Base Types\Cyclic_Base" />
     <Folder Include="Base Types\Initialise" />
     <Folder Include="Base Types\Task_Base" />
-    <Folder Include="XtsRunner" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Eventlogger Library">
