@@ -66,6 +66,10 @@
     <Folder Include="XtsRunner" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Eventlogger Library">
+      <DefaultResolution>Eventlogger Library, * (Beckhoff UK)</DefaultResolution>
+      <Namespace>Eventlogger_Library</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
