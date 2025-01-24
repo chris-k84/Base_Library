@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FileVersion>1.0.0.0</FileVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{b17d6814-9c2d-441a-89b0-dd85feeefa73}</ProjectGuid>
+    <SubObjectsSortedByName>true</SubObjectsSortedByName>
+    <DownloadApplicationInfo>true</DownloadApplicationInfo>
+    <WriteProductVersion>false</WriteProductVersion>
+    <GenerateTpy>false</GenerateTpy>
+    <Name>Base_Lib</Name>
+    <ProgramVersion>3.1.4026.12</ProgramVersion>
+    <Application>{d134618d-73de-4709-a3b0-a1888a75c38b}</Application>
+    <TypeSystem>{4517a9eb-d6d4-425f-a92d-1f2c972665b9}</TypeSystem>
+    <Implicit_Task_Info>{f7d1a971-3353-43eb-9cc4-18a7eec11f59}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{b0c95d26-9a23-4995-88fb-cdd905cd5584}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{53e3b8a0-04ec-4510-adc6-569f5a468869}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{52eb7aa0-ba69-491b-908d-c45c4bb81f18}</LibraryReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Base Types\Cyclic_Base\CyclicBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base Types\Cyclic_Base\ICyclic.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base Types\Initialise\I_Initialise.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base Types\Task_Base\ITask.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base Types\Task_Base\TaskBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="XtsRunner\I_ObjectRunner.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="XtsRunner\ObjectRunner.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Base Types" />
+    <Folder Include="Base Types\Cyclic_Base" />
+    <Folder Include="Base Types\Initialise" />
+    <Folder Include="Base Types\Task_Base" />
+    <Folder Include="XtsRunner" />
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Module">
+      <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Module</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+    </PlaceholderReference>
+  </ItemGroup>
+  <ProjectExtensions>
+    <PlcProjectOptions>
+      <XmlArchive>
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
+      <v n="Name">"&lt;ProjectRoot&gt;"</v>
+      <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+        <v>{29BD8D0C-3586-4548-BB48-497B9A01693F}</v>
+        <o>
+          <v n="Name">"{29BD8D0C-3586-4548-BB48-497B9A01693F}"</v>
+          <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+            <v>Rules</v>
+            <o>
+              <v n="Name">"Rules"</v>
+              <d n="SubKeys" t="Hashtable" />
+              <d n="Values" t="Hashtable" />
+            </o>
+          </d>
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{8A0FB252-96EB-4DCC-A5B4-B4804D05E2D6}</v>
+        <o>
+          <v n="Name">"{8A0FB252-96EB-4DCC-A5B4-B4804D05E2D6}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+            <v>WriteLineIDs</v>
+            <v>False</v>
+          </d>
+        </o>
+        <v>{8F99A816-E488-41E4-9FA3-846536012284}</v>
+        <o>
+          <v n="Name">"{8F99A816-E488-41E4-9FA3-846536012284}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String" cvt="String">
+            <v>DisabledWarningIds</v>
+            <v>410,5410</v>
+          </d>
+        </o>
+        <v>{F66C7017-BDD8-4114-926C-81D6D687E35F}</v>
+        <o>
+          <v n="Name">"{F66C7017-BDD8-4114-926C-81D6D687E35F}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+            <v>CalcActiveTransOnly</v>
+            <v>True</v>
+          </d>
+        </o>
+      </d>
+      <d n="Values" t="Hashtable" />
+    </o>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
+    </PlcProjectOptions>
+  </ProjectExtensions>
+</Project>
