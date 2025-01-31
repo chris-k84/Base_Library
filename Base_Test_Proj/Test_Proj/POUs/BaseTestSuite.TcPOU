@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="BaseTestSuite" Id="{92552d02-200d-47eb-ae91-d0e3f8621688}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK BaseTestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

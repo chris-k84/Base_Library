@@ -3,70 +3,55 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{b17d6814-9c2d-441a-89b0-dd85feeefa73}</ProjectGuid>
+    <ProjectGuid>{95cb3eac-290b-4454-bb33-44fd15cc6158}</ProjectGuid>
     <SubObjectsSortedByName>true</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>Base_Lib</Name>
+    <Name>Test_Proj</Name>
     <ProgramVersion>3.1.4026.13</ProgramVersion>
-    <Application>{d134618d-73de-4709-a3b0-a1888a75c38b}</Application>
-    <TypeSystem>{4517a9eb-d6d4-425f-a92d-1f2c972665b9}</TypeSystem>
-    <Implicit_Task_Info>{f7d1a971-3353-43eb-9cc4-18a7eec11f59}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{b0c95d26-9a23-4995-88fb-cdd905cd5584}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{53e3b8a0-04ec-4510-adc6-569f5a468869}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{52eb7aa0-ba69-491b-908d-c45c4bb81f18}</LibraryReferences>
-    <Company>Beckhoff UK</Company>
-    <Released>true</Released>
-    <AllowChecksForLibrary>false</AllowChecksForLibrary>
-    <POUsForPropertyAccessIncluded>false</POUsForPropertyAccessIncluded>
-    <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
-    <Title>Base Library</Title>
-    <ProjectVersion>1.0.0.0</ProjectVersion>
-    <LibraryCategories>
-      <LibraryCategory xmlns="">
-        <Id>{a4a00b8a-9270-48aa-b020-371bd9c3e701}</Id>
-        <Version>1.0.0.0</Version>
-        <DefaultName>Beckhoff UK</DefaultName>
-      </LibraryCategory>
-    </LibraryCategories>
-    <SelectedLibraryCategories>
-      <Id xmlns="">{a4a00b8a-9270-48aa-b020-371bd9c3e701}</Id>
-    </SelectedLibraryCategories>
-    <Author>Chris Knight</Author>
-    <VirtualLibrary>true</VirtualLibrary>
+    <Application>{028da741-97b3-4893-bd08-fcc77be559ce}</Application>
+    <TypeSystem>{6f5b5d5f-4e80-43ec-bce0-42425203c0ad}</TypeSystem>
+    <Implicit_Task_Info>{a3b5ac5f-8a52-44ec-823e-704d913127f0}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{a4fdfc08-fec1-4983-bc54-9756a7603b28}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{505a9a04-225b-4315-9608-d83c9b9463d0}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{185abf2c-312a-418f-ad94-5bfda8c4b17c}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Base Types\Cyclic_Base\CyclicBase.TcPOU">
+    <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base Types\Cyclic_Base\ICyclic.TcIO">
+    <Compile Include="POUs\BaseTestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base Types\Initialise\I_Initialise.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base Types\Task_Base\ITask.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base Types\Task_Base\TaskBase.TcPOU">
+    <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Base Types" />
-    <Folder Include="Base Types\Cyclic_Base" />
-    <Folder Include="Base Types\Initialise" />
-    <Folder Include="Base Types\Task_Base" />
+    <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderReference Include="Eventlogger Library">
-      <DefaultResolution>Eventlogger Library, * (Beckhoff UK)</DefaultResolution>
-      <Namespace>Eventlogger_Library</Namespace>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3PlcTestSuite">
+      <DefaultResolution>Tc3PlcTestSuite, * (Simmel)</DefaultResolution>
+      <Namespace>Tc3PlcTestSuite</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+    </PlaceholderReference>
+    <PlaceholderReference Include="[Base Library]">
+      <DefaultResolution>[Base Library], * (Beckhoff UK)</DefaultResolution>
+      <Namespace>Base_Library</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ProjectExtensions>
@@ -79,6 +64,12 @@
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
         <o>
           <v n="Name">"{192FAD59-8248-4824-A8DE-9177C94C195A}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{246001F4-279D-43AC-B241-948EB31120E1}</v>
+        <o>
+          <v n="Name">"{246001F4-279D-43AC-B241-948EB31120E1}"</v>
           <d n="SubKeys" t="Hashtable" />
           <d n="Values" t="Hashtable" />
         </o>
