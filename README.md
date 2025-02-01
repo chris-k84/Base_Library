@@ -18,7 +18,7 @@ This started out as an XTS library, then became something else, a huge crawling 
 
 ## The Goal
 
-
+The Goal of this repo is to define a set of base behaviour of any module created for PLC use. The objects within this library will force a particular behaviour for handling cyclic behaviour, task calls and initialisation. All objects used in a PLC program will be built on these basic building blocks.
 
 ## Background
 
