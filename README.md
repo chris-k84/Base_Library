@@ -22,14 +22,18 @@ The Goal of this repo is to define a set of base behaviour of any module created
 
 ## Background
 
-
+The background to this repo is essentially my leanring journey in PLC programming. Initially i had no strong view on how to construct a PLC program. As time has gone on I have learned OOP provides the best soltuion for architecting code.
+This doesnt mean you must use full OOP, design patterns, testing etc, I believe you should, but its not required. Instead it means you simply divide the code into function, repeatable blocks, calling them classes or FBs doesnt matter.
+The important part is you break up code into block and call those blocks cyclically, rather than in the structured programming paradigm.
+Once you go donw this path, libraries like this start to make more sense. 
+This library forms the basis of how i think those blocks of code should be constructed and operated.
 
 ## Description
 
 
 ## Repository Design
 
-
+The repo is split into 2 projects, the base library and the testing project, the library is referenced in the test project. The test project can be run in the UmRT.
 
 ## Tests
 
