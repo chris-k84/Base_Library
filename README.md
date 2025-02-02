@@ -30,6 +30,13 @@ This library forms the basis of how i think those blocks of code should be const
 
 ## Description
 
+The repo is effectively formed of three sections, Cyclic_Base, Task_Base and Initialise. 
+
+The Cyclic_Base is the most basic element of these, it is used in all objects in the code created using this library. Every class/fb you create should extend this class.
+This will enforce a cyclic behaviour of calling the cycle method of the object you create. Thats it, thats the big impact, but by doing so you shift the cyclic behaviour of the objectinto that method.
+This means you no longer call the body of the FB yo make. This sounds pointless, but it creates some amazing and interesting possibilities later on.
+
+
 
 ## Repository Design
 
