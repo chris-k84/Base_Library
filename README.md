@@ -36,7 +36,14 @@ The Cyclic_Base is the most basic element of these, it is used in all objects in
 This will enforce a cyclic behaviour of calling the cycle method of the object you create. Thats it, thats the big impact, but by doing so you shift the cyclic behaviour of the objectinto that method.
 This means you no longer call the body of the FB yo make. This sounds pointless, but it creates some amazing and interesting possibilities later on.
 
+The Task_Base is a second level of this, the task class again exits to be extended by the function blocks you create.
+The task enforces an interface that includes a Busy, Done, Error, Abort operation. You can see how the cyclic code would be writtena round these.
+As the module is triggered you set the error, done flags false and the busy true, once the operation is complete the busy flag drops and the error/done can be set.
+This allows you to break the cyclic operation of code, you can command an operation, then there is no need to observe the process, simply wait for the outputs to be set.
 
+Finally the Initialise, sometimes it is useful to have a pre cyclic operation, assigning pointers for example.
+This was implemented as an interface, it simply gets implemented in your function block to enfire the method requirement.
+It has no code implementation requirement itself so an interface was enough. This is unlike the cyclic and task base which are both abstract types.
 
 ## Repository Design
 
