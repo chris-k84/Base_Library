@@ -51,7 +51,7 @@ The repo is split into 2 projects, the base library and the testing project, the
 
 ## Tests
 
-
+There is a unit testing project created, the library is referenced in the test project. 
 
 ## Support
 
