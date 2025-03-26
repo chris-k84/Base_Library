@@ -46,7 +46,7 @@
     <Compile Include="Base Types\Initialise\I_Initialise.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base Types\Task_Base\ITask.TcIO">
+    <Compile Include="Base Types\Task_Base\I_Task.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Base Types\Task_Base\TaskBase.TcPOU">

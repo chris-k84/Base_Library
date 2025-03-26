@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TaskBase" Id="{1c339505-1708-4516-99c7-fe794eeac80e}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TaskBase IMPLEMENTS I_Cyclic, ITask
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TaskBase IMPLEMENTS I_Cyclic, I_Task
 VAR
 	_Busy : BOOL;
 	_Error : BOOL;
