@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Resettable" Id="{9dcd830e-9ab4-4ce2-a3e2-d2a7698b4f77}">
+    <Declaration><![CDATA[INTERFACE I_Resettable
+]]></Declaration>
+    <Method Name="Reset" Id="{98586d87-7191-416b-9787-61b6e82fe760}">
+      <Declaration><![CDATA[METHOD PUBLIC Reset : HRESULT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

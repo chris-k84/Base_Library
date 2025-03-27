@@ -22,7 +22,7 @@
     <POUsForPropertyAccessIncluded>false</POUsForPropertyAccessIncluded>
     <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
     <Title>Base Library</Title>
-    <ProjectVersion>2.0.0.0</ProjectVersion>
+    <ProjectVersion>2.1.0.0</ProjectVersion>
     <LibraryCategories>
       <LibraryCategory xmlns="">
         <Id>{a4a00b8a-9270-48aa-b020-371bd9c3e701}</Id>
@@ -46,6 +46,9 @@
     <Compile Include="Base Types\Initialise\I_Initialise.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base Types\Reset_Base\I_Resettable.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Base Types\Task_Base\I_Task.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -57,6 +60,7 @@
     <Folder Include="Base Types" />
     <Folder Include="Base Types\Cyclic_Base" />
     <Folder Include="Base Types\Initialise" />
+    <Folder Include="Base Types\Reset_Base" />
     <Folder Include="Base Types\Task_Base" />
   </ItemGroup>
   <ItemGroup>
