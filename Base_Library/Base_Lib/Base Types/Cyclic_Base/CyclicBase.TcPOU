@@ -3,7 +3,7 @@
   <POU Name="CyclicBase" Id="{822a4270-a76d-44ce-8055-ee2099020175}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT CyclicBase IMPLEMENTS I_Cyclic
 VAR
-	Logger : TcMessage_Ext;
+	iLogger : I_Message;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -18,5 +18,16 @@ END_VAR
         <ST><![CDATA[{analysis -2}]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Logger" Id="{99e0c556-11d4-44e4-8dcc-e93ffcb49823}">
+      <Declaration><![CDATA[PROPERTY Logger : I_Message]]></Declaration>
+      <Set Name="Set" Id="{ef61a08c-5eed-453b-8a04-5ea1b1ea1393}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[iLogger := Logger;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
   </POU>
 </TcPlcObject>
