@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <Itf Name="I_Abortable" Id="{3a18816e-5c2a-4dda-91af-62fbcdd1161b}">
-    <Declaration><![CDATA[INTERFACE I_Abortable
+    <Declaration><![CDATA[INTERFACE I_Abortable EXTENDS __SYSTEM.IQueryInterface
 ]]></Declaration>
     <Method Name="Abort" Id="{17363283-e68f-4bd6-b67f-b264bff9b57d}">
       <Declaration><![CDATA[METHOD Abort : HRESULT
