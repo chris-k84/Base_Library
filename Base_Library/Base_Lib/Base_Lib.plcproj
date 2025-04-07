@@ -9,7 +9,7 @@
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>Base_Lib</Name>
-    <ProgramVersion>3.1.4026.14</ProgramVersion>
+    <ProgramVersion>3.1.4026.15</ProgramVersion>
     <Application>{d134618d-73de-4709-a3b0-a1888a75c38b}</Application>
     <TypeSystem>{4517a9eb-d6d4-425f-a92d-1f2c972665b9}</TypeSystem>
     <Implicit_Task_Info>{f7d1a971-3353-43eb-9cc4-18a7eec11f59}</Implicit_Task_Info>
@@ -58,6 +58,15 @@
     <Compile Include="Base Types\Task_Base\TaskBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Cyclic Runner\I_HostObjects.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cyclic Runner\I_Object.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Cyclic Runner\ObjectRunner.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base Types" />
@@ -66,6 +75,7 @@
     <Folder Include="Base Types\Abort_Base" />
     <Folder Include="Base Types\Reset_Base" />
     <Folder Include="Base Types\Task_Base" />
+    <Folder Include="Cyclic Runner" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Base_Lib.tmc">

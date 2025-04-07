@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="ObjectRunner" Id="{4adb75ec-914c-46a2-96a4-b49d6ed1e005}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ObjectRunner IMPLEMENTS I_Cyclic, I_HostObjects
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	CyclicModules : ARRAY[0..MaxRegisteredModules] OF I_Cyclic;
+	InitialiseModules : ARRAY[0..MaxRegisteredModules] OF I_Initialisable;
+	ResetableModules : ARRAY[0..MaxRegisteredModules] OF I_Resettable;
+	AbortableModules : ARRAY[0..MaxRegisteredModules] OF I_Abortable;
+	CyclicModuleCount : INT := 0;
+	InitModuleCount : INT := 0;
+	ResetModuleCount : INT := 0;
+	i: INT;
+	InitialisationCount : INT := 0;
+	Registered: BOOL;
+	Initialised : BOOL := FALSE;
+	AbortModuleCount: INT;
+END_VAR
+VAR CONSTANT
+	MaxRegisteredModules : INT := 99;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Register" Id="{c7ff2bee-e5c1-4c43-a9c6-2b394f2cac57}" />
+    <Folder Name="Status" Id="{a62bb36a-03ff-4c06-8f63-8f5c3147fde2}" />
+    <Method Name="AreAllModuleInitialised" Id="{4d383a02-46c6-4353-8362-547fa2f80ae1}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD AreAllModuleInitialised : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AreAllModuleInitialised := Initialised;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Cycle" Id="{07b170dc-1426-48b0-b328-82870c7027f5}">
+      <Declaration><![CDATA[METHOD PUBLIC  Cycle : HRESULT
+VAR_INPUT
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO MaxRegisteredModules DO
+	IF CyclicModules[i] <> 0 THEN
+		CyclicModules[i].Cycle();
+	END_IF
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DeregisterAllModules" Id="{801399c7-4ed5-4baa-bb84-25ca1ab9b024}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD DeregisterAllModules : HRESULT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO MaxRegisteredModules DO
+	CyclicModules[i] := 0;
+	InitialiseModules[i] := 0;
+	ResetableModules[i] := 0;
+END_FOR
+CyclicModuleCount := 0;
+InitModuleCount := 0;
+ResetModuleCount := 0;
+DeregisterAllModules := 1;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetCyclicModuleCount" Id="{ce16b2d3-0e8a-4df6-aa9c-1c1b403838ba}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD GetCyclicModuleCount : INT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetCyclicModuleCount := CyclicModuleCount;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetInitModuleCount" Id="{a9fb930d-907c-4894-834e-3a7f560764dd}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD GetInitModuleCount : INT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetInitModuleCount := InitModuleCount;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetResetableModuleCount" Id="{c2216e56-0e04-469c-b757-6c0f012da51c}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD GetResetableModuleCount : INT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetResetableModuleCount := ResetModuleCount;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Initialise" Id="{498dbf2f-31fd-468f-af2a-ef254d08806c}">
+      <Declaration><![CDATA[METHOD Initialise : HRESULT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF InitialisationCount = 0 THEN
+	Initialised := TRUE;
+	Initialise := -1;
+ELSE
+	IF InitialisationCount < MaxRegisteredModules THEN
+		IF InitialiseModules[InitialisationCount] <> 0 THEN
+			IF InitialiseModules[InitialisationCount].Initialise() = 2 THEN
+				InitialisationCount := InitialisationCount + 1;
+			END_IF
+		ELSE
+			InitialisationCount := InitialisationCount + 1;
+		END_IF
+	ELSE
+		Initialise := 1;
+		InitialisationCount := 0;
+		Initialised := TRUE;
+	END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RegisterAbortable" Id="{165e2b31-24e6-4099-863d-0a046dfe15b7}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD RegisterAbortable : HRESULT
+VAR_INPUT
+	Abortable : I_Abortable;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Abortable <> 0 AND_THEN AbortModuleCount < (MaxRegisteredModules + 1) THEN
+	Registered := FALSE;
+	FOR i := 0 TO MaxRegisteredModules DO
+		IF AbortableModules[i] = Abortable THEN
+			Registered := TRUE;
+		END_IF
+	END_FOR
+	IF NOT Registered THEN	
+		FOR i := 0 TO MaxRegisteredModules DO
+			IF AbortableModules[i] = 0 THEN
+				AbortableModules[i] := Abortable;
+				AbortModuleCount := AbortModuleCount + 1;
+				EXIT;
+			END_IF
+		END_FOR
+		RegisterAbortable := 1;
+	ELSE
+		RegisterAbortable := -1;
+	END_IF	
+ELSE
+	RegisterAbortable := -2;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RegisterCyclic" Id="{6bccdbde-9c92-4620-9761-b9e0f084b43d}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD RegisterCyclic : HRESULT
+VAR_INPUT
+	Cyclic : I_Cyclic;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Cyclic <> 0 AND_THEN CyclicModuleCount < (MaxRegisteredModules + 1) THEN
+	Registered := FALSE;
+	FOR i := 0 TO MaxRegisteredModules DO
+		IF CyclicModules[i] = Cyclic THEN
+			Registered := TRUE;
+		END_IF
+	END_FOR
+	IF NOT Registered THEN	
+		FOR i := 0 TO MaxRegisteredModules DO
+			IF CyclicModules[i] = 0 THEN
+				CyclicModules[i] := Cyclic;
+				CyclicModuleCount := CyclicModuleCount + 1;
+				EXIT;
+			END_IF
+		END_FOR
+		RegisterCyclic := 1;
+	ELSE
+		RegisterCyclic := -1;
+	END_IF	
+ELSE
+	RegisterCyclic := -2;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RegisterInitialise" Id="{3f91b9ee-7025-425f-bcc4-5c1a390dcc0a}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD RegisterInitialise : hresult
+VAR_INPUT
+	Initialise : I_Initialisable;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Initialise <> 0 AND_THEN CyclicModuleCount < (MaxRegisteredModules + 1) THEN
+	Registered := FALSE;
+	FOR i := 0 TO MaxRegisteredModules DO
+		IF InitialiseModules[i] = Initialise THEN
+			Registered := TRUE;
+		END_IF
+	END_FOR
+	IF NOT Registered THEN	
+		FOR i := 0 TO MaxRegisteredModules DO
+			IF InitialiseModules[i] = 0 THEN
+				InitialiseModules[i] := Initialise;
+				InitModuleCount := InitModuleCount + 1;
+			END_IF
+			EXIT;
+		END_FOR
+		RegisterInitialise := 1;
+	ELSE
+		RegisterInitialise := -1;
+	END_IF	
+ELSE
+	RegisterInitialise := -2;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RegisterModule" Id="{5f816535-6603-4c30-b42c-afe250745821}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD RegisterModule : HRESULT
+VAR_INPUT
+	Registerable : I_Object;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Registerable <> 0 THEN
+	Registerable.RegisterWithParent(THIS^);
+	RegisterModule := 1;
+ELSE
+	RegisterModule := -1;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RegisterResettable" Id="{52101959-06bd-45e3-88da-97492c3d9759}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD RegisterResettable : HRESULT
+VAR_INPUT
+	Resetable : I_Resettable;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Resetable <> 0 AND_THEN ResetModuleCount < (MaxRegisteredModules + 1) THEN
+	Registered := FALSE;
+	FOR i := 0 TO MaxRegisteredModules DO
+		IF ResetableModules[i] = Resetable THEN
+			Registered := TRUE;
+		END_IF
+	END_FOR
+	IF NOT Registered THEN	
+		FOR i := 0 TO MaxRegisteredModules DO
+			IF ResetableModules[i] = 0 THEN
+				ResetableModules[i] := Resetable;
+				ResetModuleCount := ResetModuleCount + 1;
+				EXIT;
+			END_IF
+		END_FOR
+		RegisterResettable := 1;
+	ELSE
+		RegisterResettable := -1;
+	END_IF	
+ELSE
+	RegisterResettable := -2;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
