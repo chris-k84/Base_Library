@@ -101,7 +101,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF InitialisationCount = 0 THEN
+        <ST><![CDATA[IF InitModuleCount = 0 THEN
 	Initialised := TRUE;
 	Initialise := -1;
 ELSE
