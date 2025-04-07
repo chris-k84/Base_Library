@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{45608e08-666f-403e-a083-2e21d622d99c}">
+  <POU Name="MAIN" Id="{45608e08-666f-403e-a083-2e21d622d99c}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	ObjRunnerTestSuite : RunnerTestSuite;
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[ObjRunnerTestSuite();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
