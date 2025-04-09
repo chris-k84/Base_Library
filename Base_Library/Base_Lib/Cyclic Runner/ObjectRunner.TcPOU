@@ -97,7 +97,31 @@ END_VAR
     </Method>
     <Method Name="Initialise" Id="{498dbf2f-31fd-468f-af2a-ef254d08806c}">
       <Declaration><![CDATA[METHOD Initialise : HRESULT
-VAR_INPUT
+VAR
+	i : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF InitModuleCount = 0 THEN
+	Initialised := TRUE;
+	Initialise := -1;
+ELSE
+	Initialised := TRUE;
+	FOR i := 0 TO InitModuleCount DO
+		IF InitialiseModules[InitialisationCount] <> 0 THEN
+			IF NOT InitialiseModules[i].IsInitialised() THEN
+				InitialiseModules[InitialisationCount].Initialise();
+				Initialised := FALSE;
+			END_IF
+		END_IF
+	END_FOR
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Initialise_Ordered" Id="{e2eb6d91-e3fa-4f81-bac1-e0ba579fc7cd}">
+      <Declaration><![CDATA[METHOD Initialise_Ordered : HRESULT
+VAR
+	i : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>

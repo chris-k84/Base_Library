@@ -9,5 +9,11 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="IsInitialised" Id="{1efc2857-6096-4a33-8c6e-c9e528f5e45b}">
+      <Declaration><![CDATA[METHOD IsInitialised : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
   </Itf>
 </TcPlcObject>
