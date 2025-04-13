@@ -238,8 +238,8 @@ END_VAR
 			IF InitialiseModules[i] = 0 THEN
 				InitialiseModules[i] := Initialise;
 				InitModuleCount := InitModuleCount + 1;
+				EXIT;
 			END_IF
-			EXIT;
 		END_FOR
 		RegisterInitialise := 1;
 	ELSE
