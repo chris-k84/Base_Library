@@ -95,6 +95,15 @@ END_VAR
         <ST><![CDATA[GetResetableModuleCount := ResetModuleCount;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="InitialisationComplete" Id="{6c53f7d1-d37c-4304-8323-1cc3c42116b1}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD InitialisationComplete : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[InitialisationComplete := Initialised;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Initialise" Id="{498dbf2f-31fd-468f-af2a-ef254d08806c}">
       <Declaration><![CDATA[METHOD Initialise : HRESULT
 VAR
@@ -115,6 +124,9 @@ ELSE
 			END_IF
 		END_IF
 	END_FOR
+	IF Initialised THEN
+		Initialise := 1;
+	END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
