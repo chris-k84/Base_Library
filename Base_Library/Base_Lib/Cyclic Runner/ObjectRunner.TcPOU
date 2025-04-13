@@ -127,7 +127,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF InitModuleCount = 0 THEN
 	Initialised := TRUE;
-	Initialise := -1;
+	Initialise_Ordered := -1;
 ELSE
 	IF InitialisationCount < MaxRegisteredModules THEN
 		IF InitialiseModules[InitialisationCount] <> 0 THEN
@@ -138,7 +138,7 @@ ELSE
 			InitialisationCount := InitialisationCount + 1;
 		END_IF
 	ELSE
-		Initialise := 1;
+		Initialise_Ordered := 1;
 		InitialisationCount := 0;
 		Initialised := TRUE;
 	END_IF
