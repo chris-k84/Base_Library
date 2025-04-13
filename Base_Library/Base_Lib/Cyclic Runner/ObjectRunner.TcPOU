@@ -119,7 +119,7 @@ ELSE
 	FOR i := 0 TO InitModuleCount DO
 		IF InitialiseModules[i] <> 0 THEN
 			IF NOT InitialiseModules[i].IsInitialised() THEN
-				InitialiseModules[InitialisationCount].Initialise();
+				InitialiseModules[i].Initialise();
 				Initialised := FALSE;
 			END_IF
 		END_IF
