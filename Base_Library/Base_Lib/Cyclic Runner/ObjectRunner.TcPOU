@@ -16,11 +16,10 @@ VAR
 	InitModuleCount : INT := 0;
 	ResetModuleCount : INT := 0;
 	TaskModuleCount : INT := 0;
-	i: INT;
+	AbortModuleCount: INT := 0;
 	InitialisationCount : INT := 0;
 	Registered: BOOL;
 	Initialised : BOOL := FALSE;
-	AbortModuleCount: INT;
 END_VAR
 VAR CONSTANT
 	MaxRegisteredModules : INT := 99;
@@ -29,8 +28,25 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Folder Name="Commands" Id="{2a4010dc-86a3-415f-b80c-b83287521e23}" />
     <Folder Name="Register" Id="{c7ff2bee-e5c1-4c43-a9c6-2b394f2cac57}" />
     <Folder Name="Status" Id="{a62bb36a-03ff-4c06-8f63-8f5c3147fde2}" />
+    <Method Name="Abort" Id="{a3f73dfe-c1e6-4ebe-899b-17232f3678e0}" FolderPath="Commands\">
+      <Declaration><![CDATA[METHOD Abort : BOOL
+VAR_INPUT
+END_VAR
+VAR	
+	i: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO ResetModuleCount - 1 DO
+	IF ResetableModules[i] <> 0 THEN
+		ResetableModules[i].Reset();
+	END_IF
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="AreAllModuleInitialised" Id="{4d383a02-46c6-4353-8362-547fa2f80ae1}" FolderPath="Status\">
       <Declaration><![CDATA[METHOD AreAllModuleInitialised : BOOL
 VAR_INPUT
@@ -40,9 +56,12 @@ END_VAR
         <ST><![CDATA[AreAllModuleInitialised := Initialised;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Cycle" Id="{07b170dc-1426-48b0-b328-82870c7027f5}">
+    <Method Name="Cycle" Id="{07b170dc-1426-48b0-b328-82870c7027f5}" FolderPath="Commands\">
       <Declaration><![CDATA[METHOD PUBLIC  Cycle : HRESULT
 VAR_INPUT
+END_VAR
+VAR	
+	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[FOR i := 0 TO CyclicModuleCount -1 DO
@@ -106,7 +125,7 @@ END_VAR
         <ST><![CDATA[InitialisationComplete := Initialised;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Initialise" Id="{498dbf2f-31fd-468f-af2a-ef254d08806c}">
+    <Method Name="Initialise" Id="{498dbf2f-31fd-468f-af2a-ef254d08806c}" FolderPath="Commands\">
       <Declaration><![CDATA[METHOD Initialise : HRESULT
 VAR
 	i : INT;
@@ -132,7 +151,7 @@ ELSE
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Initialise_Ordered" Id="{e2eb6d91-e3fa-4f81-bac1-e0ba579fc7cd}">
+    <Method Name="Initialise_Ordered" Id="{e2eb6d91-e3fa-4f81-bac1-e0ba579fc7cd}" FolderPath="Commands\">
       <Declaration><![CDATA[METHOD Initialise_Ordered : HRESULT
 VAR
 	i : INT;
@@ -328,11 +347,13 @@ ELSE
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Reset" Id="{fb7565d4-0f80-4344-9ed9-0617c6e3fe22}">
+    <Method Name="Reset" Id="{fb7565d4-0f80-4344-9ed9-0617c6e3fe22}" FolderPath="Commands\">
       <Declaration><![CDATA[METHOD Reset : HRESULT
 VAR_INPUT
 END_VAR
-]]></Declaration>
+VAR	
+	i: INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[FOR i := 0 TO ResetModuleCount - 1 DO
 	IF ResetableModules[i] <> 0 THEN
