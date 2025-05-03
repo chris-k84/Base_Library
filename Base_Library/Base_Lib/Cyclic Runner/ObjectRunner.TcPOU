@@ -11,9 +11,11 @@ VAR
 	InitialiseModules : ARRAY[0..MaxRegisteredModules] OF I_Initialisable;
 	ResetableModules : ARRAY[0..MaxRegisteredModules] OF I_Resettable;
 	AbortableModules : ARRAY[0..MaxRegisteredModules] OF I_Abortable;
+	TaskModules : ARRAY[0..MaxRegisteredModules] OF I_Task;
 	CyclicModuleCount : INT := 0;
 	InitModuleCount : INT := 0;
 	ResetModuleCount : INT := 0;
+	TaskModuleCount : INT := 0;
 	i: INT;
 	InitialisationCount : INT := 0;
 	Registered: BOOL;
@@ -292,6 +294,37 @@ END_VAR]]></Declaration>
 	END_IF	
 ELSE
 	RegisterResettable := -2;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RegisterTask" Id="{263f7a41-e19a-4805-b578-bf820daaf1ba}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD RegisterTask : HRESULT
+VAR_INPUT
+	Task : I_Task;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Task <> 0 AND_THEN TaskModuleCount < (MaxRegisteredModules + 1) THEN
+	Registered := FALSE;
+	FOR i := 0 TO MaxRegisteredModules DO
+		IF TaskModules[i] = Task THEN
+			Registered := TRUE;
+		END_IF
+	END_FOR
+	IF NOT Registered THEN	
+		FOR i := 0 TO MaxRegisteredModules DO
+			IF TaskModules[i] = 0 THEN
+				TaskModules[i] := Task;
+				TaskModuleCount := TaskModuleCount + 1;
+				EXIT;
+			END_IF
+		END_FOR
+		RegisterTask := 1;
+	ELSE
+		RegisterTask := -1;
+	END_IF	
+ELSE
+	RegisterTask := -2;
 END_IF]]></ST>
       </Implementation>
     </Method>

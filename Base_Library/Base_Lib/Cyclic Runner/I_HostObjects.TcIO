@@ -37,5 +37,12 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="RegisterTask" Id="{6638648b-69a5-453e-8b03-64c126ec6541}">
+      <Declaration><![CDATA[METHOD RegisterTask : HRESULT
+VAR_INPUT
+	Task : I_Task;
+END_VAR
+]]></Declaration>
+    </Method>
   </Itf>
 </TcPlcObject>
