@@ -91,6 +91,15 @@ DeregisterAllModules := 1;
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="GetAbortModuleCount" Id="{3ae76c70-4548-4df5-acc2-e0eea77bf80c}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD GetAbortModuleCount : INT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetAbortModuleCount := AbortModuleCount;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="GetCyclicModuleCount" Id="{ce16b2d3-0e8a-4df6-aa9c-1c1b403838ba}" FolderPath="Status\">
       <Declaration><![CDATA[METHOD GetCyclicModuleCount : INT
 VAR_INPUT
@@ -116,6 +125,15 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetResetableModuleCount := ResetModuleCount;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetTaskModuleCount" Id="{1f04fa34-f4be-43a4-b600-de22cc592d9f}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD GetTaskModuleCount : INT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetTaskModuleCount := TaskModuleCount;]]></ST>
       </Implementation>
     </Method>
     <Method Name="InitialisationComplete" Id="{6c53f7d1-d37c-4304-8323-1cc3c42116b1}" FolderPath="Status\">

@@ -22,7 +22,7 @@
     <POUsForPropertyAccessIncluded>false</POUsForPropertyAccessIncluded>
     <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
     <Title>Base Library</Title>
-    <ProjectVersion>2.1.0.0</ProjectVersion>
+    <ProjectVersion>2.2.0.0</ProjectVersion>
     <LibraryCategories>
       <LibraryCategory xmlns="">
         <Id>{a4a00b8a-9270-48aa-b020-371bd9c3e701}</Id>
