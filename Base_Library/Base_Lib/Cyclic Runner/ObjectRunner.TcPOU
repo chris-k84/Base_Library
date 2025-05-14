@@ -265,8 +265,8 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="RegisterInitialise" Id="{3f91b9ee-7025-425f-bcc4-5c1a390dcc0a}" FolderPath="Register\">
-      <Declaration><![CDATA[METHOD RegisterInitialise : hresult
+    <Method Name="RegisterInitialisable" Id="{3f91b9ee-7025-425f-bcc4-5c1a390dcc0a}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD RegisterInitialisable : hresult
 VAR_INPUT
 	Initialisable : I_Initialisable;
 END_VAR
@@ -289,12 +289,12 @@ END_VAR]]></Declaration>
 				EXIT;
 			END_IF
 		END_FOR
-		RegisterInitialise := 1;
+		RegisterInitialisable := 1;
 	ELSE
-		RegisterInitialise := -1;
+		RegisterInitialisable := -1;
 	END_IF	
 ELSE
-	RegisterInitialise := -2;
+	RegisterInitialisable := -2;
 END_IF
 ]]></ST>
       </Implementation>

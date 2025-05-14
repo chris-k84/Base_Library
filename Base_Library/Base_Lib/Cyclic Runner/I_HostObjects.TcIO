@@ -23,10 +23,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="RegisterInitialise" Id="{7d5a17f2-c0ba-4781-8fb0-3013526db5cb}">
-      <Declaration><![CDATA[METHOD RegisterInitialise : HRESULT
+    <Method Name="RegisterInitialisable" Id="{7d5a17f2-c0ba-4781-8fb0-3013526db5cb}">
+      <Declaration><![CDATA[METHOD RegisterInitialisable : HRESULT
 VAR_INPUT
-	Initialise : I_Initialisable;
+	Initialisable : I_Initialisable;
 END_VAR
 ]]></Declaration>
     </Method>
