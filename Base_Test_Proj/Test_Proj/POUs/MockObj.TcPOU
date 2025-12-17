@@ -23,6 +23,19 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Initialised" Id="{9ccefc82-4611-4153-984f-16110f1bc2dd}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY Initialised : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{704bdb38-63cd-4146-9195-7eb236f2d453}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="IsRegistered" Id="{432ff809-df19-4dfc-b853-62c50ce79958}">
       <Declaration><![CDATA[METHOD IsRegistered : BOOL
 VAR_INPUT
@@ -35,12 +48,12 @@ END_VAR
     <Method Name="RegisterWithParent" Id="{53309e55-7b39-4961-93ff-498d9c30e110}">
       <Declaration><![CDATA[METHOD RegisterWithParent
 VAR_INPUT
-	Runner	: I_HostObjects;
+	Parent	: I_HostObjects;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _isRegistered THEN
-	IF SUCCEEDED( Runner.RegisterCyclic(THIS^)) AND SUCCEEDED(Runner.RegisterInitialise(THIS^)) THEN
+	IF SUCCEEDED( Parent.RegisterCyclic(THIS^)) AND SUCCEEDED(Parent.RegisterInitialisable(THIS^)) THEN
 		_isRegistered := TRUE;
 	ELSE
 		_isRegistered := FALSE;

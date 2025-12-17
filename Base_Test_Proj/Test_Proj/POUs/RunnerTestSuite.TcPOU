@@ -33,10 +33,10 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	Expected := TRUE;
-	TestObjRunner.RegisterModule(TestMockObj);
+	TestObjRunner.Register(TestMockObj);
 	TestObjRunner.Initialise();
-	Actual := TestObjRunner.AreAllModuleInitialised();
-	TestObjRunner.DeregisterAllModules();
+	Actual := TestObjRunner.AllInitialised;
+	TestObjRunner.DeregisterAll();
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 END_IF]]></ST>
       </Implementation>
@@ -54,10 +54,10 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	Expected := 0;
-	TestObjRunner.RegisterModule(TestMockObj1);
-	TestObjRunner.RegisterModule(TestMockObj2);
+	TestObjRunner.Register(TestMockObj1);
+	TestObjRunner.Register(TestMockObj2);
 	Actual := TestObjRunner.GetCyclicModuleCount();
-	TestObjRunner.DeregisterAllModules();
+	TestObjRunner.DeregisterAll();
 	Actual := TestObjRunner.GetCyclicModuleCount();
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 END_IF]]></ST>
@@ -74,10 +74,10 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
-	TestObjRunner.RegisterModule(TestMockObj);
+	TestObjRunner.Register(TestMockObj);
 	Actual := TestObjRunner.GetInitModuleCount();
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
-	TestObjRunner.DeregisterAllModules();
+	TestObjRunner.DeregisterAll();
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -92,10 +92,10 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
-	TestObjRunner.RegisterModule(TestMockObj);
+	TestObjRunner.Register(TestMockObj);
 	Actual := TestObjRunner.GetCyclicModuleCount();
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
-	TestObjRunner.DeregisterAllModules();
+	TestObjRunner.DeregisterAll();
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -110,11 +110,11 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
-	TestObjRunner.RegisterModule(TestMockObj);
-	TestObjRunner.RegisterModule(TestMockObj);
+	TestObjRunner.Register(TestMockObj);
+	TestObjRunner.Register(TestMockObj);
 	Actual := TestMockObj.IsRegistered();
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
-	TestObjRunner.DeregisterAllModules();
+	TestObjRunner.DeregisterAll();
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -128,7 +128,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	Actual := FAILED( TestObjRunner.Initialise());
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
-	TestObjRunner.DeregisterAllModules();
+	TestObjRunner.DeregisterAll();
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -141,7 +141,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
-	Actual := TestObjRunner.RegisterModule(16#0);
+	Actual := TestObjRunner.Register(16#0);
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 END_IF]]></ST>
       </Implementation>
@@ -157,9 +157,9 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
-	Actual := SuCCEEDED(TestObjRunner.RegisterModule(TestMockObj));
+	Actual := SuCCEEDED(TestObjRunner.Register(TestMockObj));
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
-	TestObjRunner.DeregisterAllModules();
+	TestObjRunner.DeregisterAll();
 END_IF]]></ST>
       </Implementation>
     </Method>

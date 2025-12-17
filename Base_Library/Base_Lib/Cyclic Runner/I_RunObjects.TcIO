@@ -43,7 +43,7 @@ END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="Register" Id="{ca4bbc38-0945-478e-81fb-76a0575d0031}">
-      <Declaration><![CDATA[METHOD Register : BOOL
+      <Declaration><![CDATA[METHOD Register : HRESULT
 VAR_INPUT
 	Registerable : I_Object;
 END_VAR
