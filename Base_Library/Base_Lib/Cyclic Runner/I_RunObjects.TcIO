@@ -20,6 +20,14 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
     </Method>
+    <Method Name="DeregisterAll" Id="{f20f0940-9007-494f-b22e-4edfda01c380}">
+      <Declaration><![CDATA[METHOD DeregisterAll : HRESULT
+VAR_INPUT
+END_VAR
+VAR	
+	i: INT;
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="Initialise" Id="{de761ae2-8c67-469f-9061-c94caa53bd35}">
       <Declaration><![CDATA[METHOD Initialise : HRESULT
 VAR
@@ -31,6 +39,13 @@ END_VAR
       <Declaration><![CDATA[METHOD Initialise_Ordered : HRESULT
 VAR
 	i : INT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Register" Id="{ca4bbc38-0945-478e-81fb-76a0575d0031}">
+      <Declaration><![CDATA[METHOD Register : BOOL
+VAR_INPUT
+	Registerable : I_Object;
 END_VAR
 ]]></Declaration>
     </Method>

@@ -69,8 +69,8 @@ END_VAR]]></Declaration>
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <Method Name="DeregisterAllModules" Id="{801399c7-4ed5-4baa-bb84-25ca1ab9b024}" FolderPath="Register\">
-      <Declaration><![CDATA[METHOD DeregisterAllModules : HRESULT
+    <Method Name="DeregisterAll" Id="{801399c7-4ed5-4baa-bb84-25ca1ab9b024}" FolderPath="Register\">
+      <Declaration><![CDATA[METHOD DeregisterAll : HRESULT
 VAR_INPUT
 END_VAR
 VAR	
@@ -92,7 +92,7 @@ TaskModuleCount := 0;
 AbortModuleCount := 0;
 InitialisationCount := 0;
 ObjectCount := 0;
-DeregisterAllModules := 1;
+DeregisterAll := 1;
 ]]></ST>
       </Implementation>
     </Method>
