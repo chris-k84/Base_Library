@@ -45,17 +45,15 @@ END_VAR
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <Property Name="AllInitialised" Id="{3a3243ae-75f8-4340-b115-e3e0f0db0c51}" FolderPath="Status\">
-      <Declaration><![CDATA[PROPERTY AllInitialised : BOOL]]></Declaration>
-      <Get Name="Get" Id="{02e0512c-81a3-4e4a-9c6e-fed6ad11ffe2}">
-        <Declaration><![CDATA[VAR
+    <Method Name="AbortableModuleCount" Id="{3ae76c70-4548-4df5-acc2-e0eea77bf80c}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD AbortableModuleCount : INT
+VAR_INPUT
 END_VAR
 ]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[AllInitialised := _AllInitialised;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
+      <Implementation>
+        <ST><![CDATA[AbortableModuleCount := AbortModuleCount;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Cycle" Id="{07b170dc-1426-48b0-b328-82870c7027f5}" FolderPath="Commands\">
       <Declaration><![CDATA[METHOD PUBLIC  Cycle : HRESULT
 VAR_INPUT
@@ -64,11 +62,20 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO CyclicModuleCount -1 DO
+        <ST><![CDATA[FOR i := 0 TO ObjectRunner.CyclicModuleCount -1 DO
 	IF CyclicModules[i] <> 0 THEN
 		CyclicModules[i].Cycle();
 	END_IF
 END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CyclicModuleCount" Id="{ce16b2d3-0e8a-4df6-aa9c-1c1b403838ba}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD CyclicModuleCount : INT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[super^.CyclicModuleCount := ObjectRunner.CyclicModuleCount;]]></ST>
       </Implementation>
     </Method>
     <Method Name="DeregisterAll" Id="{801399c7-4ed5-4baa-bb84-25ca1ab9b024}" FolderPath="Register\">
@@ -87,10 +94,10 @@ END_VAR]]></Declaration>
 	AbortableModules[i] := 0;
 	TaskModules[i] := 0;
 END_FOR
-CyclicModuleCount := 0;
+ObjectRunner.CyclicModuleCount := 0;
 InitModuleCount := 0;
 ResetModuleCount := 0;
-TaskModuleCount := 0;
+ObjectRunner.TaskModuleCount := 0;
 AbortModuleCount := 0;
 InitialisationCount := 0;
 ObjectCount := 0;
@@ -98,60 +105,26 @@ DeregisterAll := 1;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="GetAbortModuleCount" Id="{3ae76c70-4548-4df5-acc2-e0eea77bf80c}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD GetAbortModuleCount : INT
+    <Method Name="InitialisableModuleCount" Id="{a9fb930d-907c-4894-834e-3a7f560764dd}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD InitialisableModuleCount : INT
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetAbortModuleCount := AbortModuleCount;]]></ST>
+        <ST><![CDATA[InitialisableModuleCount := InitModuleCount;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="GetCyclicModuleCount" Id="{ce16b2d3-0e8a-4df6-aa9c-1c1b403838ba}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD GetCyclicModuleCount : INT
-VAR_INPUT
+    <Property Name="InitialisationComplete" Id="{3a3243ae-75f8-4340-b115-e3e0f0db0c51}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY InitialisationComplete : BOOL]]></Declaration>
+      <Get Name="Get" Id="{02e0512c-81a3-4e4a-9c6e-fed6ad11ffe2}">
+        <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[GetCyclicModuleCount := CyclicModuleCount;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="GetInitModuleCount" Id="{a9fb930d-907c-4894-834e-3a7f560764dd}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD GetInitModuleCount : INT
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[GetInitModuleCount := InitModuleCount;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="GetResetableModuleCount" Id="{c2216e56-0e04-469c-b757-6c0f012da51c}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD GetResetableModuleCount : INT
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[GetResetableModuleCount := ResetModuleCount;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="GetTaskModuleCount" Id="{1f04fa34-f4be-43a4-b600-de22cc592d9f}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD GetTaskModuleCount : INT
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[GetTaskModuleCount := TaskModuleCount;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="InitialisationComplete" Id="{6c53f7d1-d37c-4304-8323-1cc3c42116b1}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD InitialisationComplete : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[InitialisationComplete := _AllInitialised;]]></ST>
-      </Implementation>
-    </Method>
+        <Implementation>
+          <ST><![CDATA[InitialisationComplete := _AllInitialised;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Initialise" Id="{498dbf2f-31fd-468f-af2a-ef254d08806c}" FolderPath="Commands\">
       <Declaration><![CDATA[METHOD Initialise : HRESULT
 VAR
@@ -262,7 +235,7 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Cyclic <> 0 AND_THEN CyclicModuleCount < (MaxRegisteredModules + 1) THEN
+        <ST><![CDATA[IF Cyclic <> 0 AND_THEN ObjectRunner.CyclicModuleCount < (MaxRegisteredModules + 1) THEN
 	Registered := FALSE;
 	FOR i := 0 TO MaxRegisteredModules DO
 		IF CyclicModules[i] = Cyclic THEN
@@ -273,7 +246,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF CyclicModules[i] = 0 THEN
 				CyclicModules[i] := Cyclic;
-				CyclicModuleCount := CyclicModuleCount + 1;
+				ObjectRunner.CyclicModuleCount := ObjectRunner.CyclicModuleCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
@@ -324,10 +297,34 @@ END_IF
     <Method Name="RegisterObject" Id="{5f816535-6603-4c30-b42c-afe250745821}" FolderPath="Register\">
       <Declaration><![CDATA[METHOD RegisterObject : HRESULT
 VAR_INPUT
-	Registerable : I_Object;
+	Object : I_Object;
+END_VAR
+VAR	
+	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF Object <> 0 AND_THEN ObjectRunner.CyclicModuleCount < (MaxRegisteredModules + 1) THEN
+	Registered := FALSE;
+	FOR i := 0 TO MaxRegisteredModules DO
+		IF CyclicModules[i] = Object THEN
+			Registered := TRUE;
+		END_IF
+	END_FOR
+	IF NOT Registered THEN	
+		FOR i := 0 TO MaxRegisteredModules DO
+			IF CyclicModules[i] = 0 THEN
+				CyclicModules[i] := Object;
+				ObjectRunner.CyclicModuleCount := ObjectRunner.CyclicModuleCount + 1;
+				EXIT;
+			END_IF
+		END_FOR
+		RegisterCyclic := 1;
+	ELSE
+		RegisterCyclic := -1;
+	END_IF	
+ELSE
+	RegisterCyclic := -2;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="RegisterResettable" Id="{52101959-06bd-45e3-88da-97492c3d9759}" FolderPath="Register\">
@@ -372,7 +369,7 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Task <> 0 AND_THEN TaskModuleCount < (MaxRegisteredModules + 1) THEN
+        <ST><![CDATA[IF Task <> 0 AND_THEN ObjectRunner.TaskModuleCount < (MaxRegisteredModules + 1) THEN
 	Registered := FALSE;
 	FOR i := 0 TO MaxRegisteredModules DO
 		IF TaskModules[i] = Task THEN
@@ -383,7 +380,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF TaskModules[i] = 0 THEN
 				TaskModules[i] := Task;
-				TaskModuleCount := TaskModuleCount + 1;
+				ObjectRunner.TaskModuleCount := ObjectRunner.TaskModuleCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
@@ -409,6 +406,24 @@ END_VAR]]></Declaration>
 		ResetableModules[i].Reset();
 	END_IF
 END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ResetableModuleCount" Id="{c2216e56-0e04-469c-b757-6c0f012da51c}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD ResetableModuleCount : INT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ResetableModuleCount := ResetModuleCount;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TaskModuleCount" Id="{1f04fa34-f4be-43a4-b600-de22cc592d9f}" FolderPath="Status\">
+      <Declaration><![CDATA[METHOD TaskModuleCount : INT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[super^.TaskModuleCount := ObjectRunner.TaskModuleCount;]]></ST>
       </Implementation>
     </Method>
   </POU>
