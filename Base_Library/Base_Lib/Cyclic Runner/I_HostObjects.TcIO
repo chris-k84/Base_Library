@@ -3,12 +3,6 @@
   <Itf Name="I_HostObjects" Id="{6b3f79ad-2a92-40cb-aed5-e9af4ed01870}">
     <Declaration><![CDATA[INTERFACE I_HostObjects
 ]]></Declaration>
-    <Method Name="DeregisterAllModules" Id="{cd468435-7f31-474e-b797-49d6e54c3deb}">
-      <Declaration><![CDATA[METHOD DeregisterAllModules : HRESULT
-VAR_INPUT
-END_VAR
-]]></Declaration>
-    </Method>
     <Method Name="RegisterAbortable" Id="{be1b7b70-9d09-49cb-90c6-a693376757b0}">
       <Declaration><![CDATA[METHOD RegisterAbortable : HRESULT
 VAR_INPUT
@@ -29,6 +23,12 @@ VAR_INPUT
 	Initialisable : I_Initialisable;
 END_VAR
 ]]></Declaration>
+    </Method>
+    <Method Name="RegisterObject" Id="{dd3d0223-46c8-4aa6-809a-31ad560b377a}">
+      <Declaration><![CDATA[METHOD RegisterObject : HRESULT
+VAR_INPUT
+	Registerable : I_Object;
+END_VAR]]></Declaration>
     </Method>
     <Method Name="RegisterResettable" Id="{04daf7da-6efd-45f8-8b64-3bc15c24a64f}">
       <Declaration><![CDATA[METHOD RegisterResettable : HRESULT
