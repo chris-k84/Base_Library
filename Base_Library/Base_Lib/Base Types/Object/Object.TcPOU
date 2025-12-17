@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Object" Id="{3eef5c14-dd0e-4f43-be11-a2e50aecaa97}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Object IMPLEMENTS I_Object
+VAR
+	_Name : T_MaxString;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_Init" Id="{0aadef3a-e355-48c1-a003-fae3f4f24a87}">
+      <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
+//The return value is not evaluated. For a specific influence, you can also declare the
+//methods explicitly and provide additional code there with the standard initialization
+//code. You can evaluate the return value.
+METHOD FB_Init: BOOL
+VAR_INPUT
+    bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
+    bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)  
+	Name : T_MaxString; 
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Name := Name;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Name" Id="{dbd74e7a-7a0a-4226-bf67-82c248c72d59}">
+      <Declaration><![CDATA[PROPERTY Name : T_MaxString]]></Declaration>
+      <Get Name="Get" Id="{31e44081-b98e-4ec8-bc6c-b288dc6ac869}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="RegisterWithParent" Id="{2bc4b5ec-e7e6-4315-a2f9-26505d5239bf}">
+      <Declaration><![CDATA[METHOD RegisterWithParent
+VAR_INPUT
+	Parent	: I_HostObjects;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

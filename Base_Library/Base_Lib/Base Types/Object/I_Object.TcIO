@@ -6,7 +6,7 @@
     <Method Name="RegisterWithParent" Id="{a872b065-77ae-4022-8c54-eeadc17c5447}">
       <Declaration><![CDATA[METHOD RegisterWithParent
 VAR_INPUT
-	Runner : I_HostObjects;
+	Parent : I_HostObjects;
 END_VAR
 ]]></Declaration>
     </Method>
