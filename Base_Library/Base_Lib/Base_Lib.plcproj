@@ -66,6 +66,9 @@
     <Compile Include="Cyclic Runner\I_HostObjects.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Cyclic Runner\I_RunObjects.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Cyclic Runner\ObjectRunner.TcPOU">
       <SubType>Code</SubType>
     </Compile>
