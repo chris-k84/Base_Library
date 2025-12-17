@@ -17,5 +17,16 @@ END_VAR
         <ST><![CDATA[{analysis -2}]]></ST>
       </Implementation>
     </Method>
+    <Method Name="RegisterWithParent" Id="{dc0a8f8d-1cb0-4102-9ca6-04d94349ff5f}">
+      <Declaration><![CDATA[METHOD RegisterWithParent
+VAR_INPUT
+	Parent	: I_HostObjects;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Parent.RegisterObject(THIS^);
+Parent.RegisterCyclic(THIS^);]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>
