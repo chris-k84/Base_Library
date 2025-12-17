@@ -32,7 +32,7 @@ PROPERTY Initialised : BOOL
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[Initialised := TRUE;]]></ST>
         </Implementation>
       </Get>
     </Property>

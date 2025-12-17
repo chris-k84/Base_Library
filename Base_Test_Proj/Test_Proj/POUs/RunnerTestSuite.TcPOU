@@ -34,10 +34,11 @@ END_VAR]]></Declaration>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	Expected := TRUE;
 	TestObjRunner.Register(TestMockObj);
-	TestObjRunner.Initialise();
-	Actual := TestObjRunner.AllInitialised;
-	TestObjRunner.DeregisterAll();
-	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	IF Succeeded(TestObjRunner.Initialise()) THEN
+		Actual := TestObjRunner.AllInitialised;
+		TestObjRunner.DeregisterAll();
+		TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -126,7 +127,8 @@ VAR_INST
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
-	Actual := FAILED( TestObjRunner.Initialise());
+	TestObjRunner.Initialise();
+	Actual := TestObjRunner.AllInitialised;
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 	TestObjRunner.DeregisterAll();
 END_IF]]></ST>
