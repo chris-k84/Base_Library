@@ -9,13 +9,13 @@ VAR
 	ResetableModules : ARRAY[0..MaxRegisteredModules] OF I_Resettable;
 	AbortableModules : ARRAY[0..MaxRegisteredModules] OF I_Abortable;
 	TaskModules : ARRAY[0..MaxRegisteredModules] OF I_Task;
+	_ObjectCount : INT := 0;
 	_CyclicModuleCount : INT := 0;
 	_InitModuleCount : INT := 0;
 	_ResetModuleCount : INT := 0;
 	_TaskModuleCount : INT := 0;
 	_AbortModuleCount: INT := 0;
 	InitialisationCount : INT := 0;
-	ObjectCount : INT := 0;
 	Registered: BOOL;
 	_AllInitialised : BOOL := TRUE;
 END_VAR
@@ -104,7 +104,7 @@ _ResetModuleCount := 0;
 _TaskModuleCount := 0;
 _AbortModuleCount := 0;
 InitialisationCount := 0;
-ObjectCount := 0;
+_ObjectCount := 0;
 DeregisterAll := 1;
 ]]></ST>
       </Implementation>
@@ -266,6 +266,17 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="RegisteredObjectCount" Id="{d5bfdf74-9fc9-4bc2-bfc6-8bd7d47a49df}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY RegisteredObjectCount : INT]]></Declaration>
+      <Get Name="Get" Id="{8820e62d-c7be-4422-b6f1-401f6ec85c4a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RegisteredObjectCount := _ObjectCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="RegisterInitialisable" Id="{3f91b9ee-7025-425f-bcc4-5c1a390dcc0a}" FolderPath="Register\">
       <Declaration><![CDATA[METHOD RegisterInitialisable : hresult
 VAR_INPUT
@@ -309,7 +320,7 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Object <> 0 AND_THEN ObjectCount < (MaxRegisteredModules + 1) THEN
+        <ST><![CDATA[IF Object <> 0 AND_THEN _ObjectCount < (MaxRegisteredModules + 1) THEN
 	Registered := FALSE;
 	FOR i := 0 TO MaxRegisteredModules DO
 		IF Objects[i] = Object THEN
@@ -320,7 +331,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF Objects[i] = 0 THEN
 				Objects[i] := Object;
-				ObjectCount := ObjectCount + 1;
+				_ObjectCount := _ObjectCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
