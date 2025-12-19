@@ -11,7 +11,7 @@ VAR
 	TaskModules : ARRAY[0..MaxRegisteredModules] OF I_Task;
 	_CyclicModuleCount : INT := 0;
 	_InitModuleCount : INT := 0;
-	ResetModuleCount : INT := 0;
+	_ResetModuleCount : INT := 0;
 	_TaskModuleCount : INT := 0;
 	AbortModuleCount: INT := 0;
 	InitialisationCount : INT := 0;
@@ -98,7 +98,7 @@ END_VAR]]></Declaration>
 END_FOR
 _CyclicModuleCount := 0;
 _InitModuleCount := 0;
-ResetModuleCount := 0;
+_ResetModuleCount := 0;
 _TaskModuleCount := 0;
 AbortModuleCount := 0;
 InitialisationCount := 0;
@@ -318,7 +318,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF Objects[i] = 0 THEN
 				Objects[i] := Object;
-				ObjectRunner.ObjectCount := ObjectRunner.ObjectCount + 1;
+				ObjectCount := ObjectCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
@@ -340,7 +340,7 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Resetable <> 0 AND_THEN ResetModuleCount < (MaxRegisteredModules + 1) THEN
+        <ST><![CDATA[IF Resetable <> 0 AND_THEN _ResetModuleCount < (MaxRegisteredModules + 1) THEN
 	Registered := FALSE;
 	FOR i := 0 TO MaxRegisteredModules DO
 		IF ResetableModules[i] = Resetable THEN
@@ -351,7 +351,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF ResetableModules[i] = 0 THEN
 				ResetableModules[i] := Resetable;
-				ResetModuleCount := ResetModuleCount + 1;
+				_ResetModuleCount := _ResetModuleCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
@@ -405,22 +405,24 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO ResetModuleCount - 1 DO
+        <ST><![CDATA[FOR i := 0 TO _ResetModuleCount - 1 DO
 	IF ResetableModules[i] <> 0 THEN
 		ResetableModules[i].Reset();
 	END_IF
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ResetableModuleCount" Id="{c2216e56-0e04-469c-b757-6c0f012da51c}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD ResetableModuleCount : INT
-VAR_INPUT
+    <Property Name="ResettableModuleCount" Id="{18d47f7d-4c1c-4473-8393-2af5f7b9823d}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY ResettableModuleCount : INT]]></Declaration>
+      <Get Name="Get" Id="{ab78379d-4236-4650-b3ef-7fb6486e8746}">
+        <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[ResetableModuleCount := ResetModuleCount;]]></ST>
-      </Implementation>
-    </Method>
+        <Implementation>
+          <ST><![CDATA[ResettableModuleCount := _ResetModuleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="TaskModuleCount" Id="{927cafff-fdb5-47b3-94f2-4fc8a6775a47}" FolderPath="Status\">
       <Declaration><![CDATA[PROPERTY TaskModuleCount : INT]]></Declaration>
       <Get Name="Get" Id="{dc8ebca7-9aee-4cbd-88f7-027f5ef5ec93}">
