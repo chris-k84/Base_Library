@@ -12,7 +12,7 @@ VAR
 	_CyclicModuleCount : INT := 0;
 	_InitModuleCount : INT := 0;
 	ResetModuleCount : INT := 0;
-	TaskModuleCount : INT := 0;
+	_TaskModuleCount : INT := 0;
 	AbortModuleCount: INT := 0;
 	InitialisationCount : INT := 0;
 	ObjectCount : INT := 0;
@@ -99,7 +99,7 @@ END_FOR
 _CyclicModuleCount := 0;
 _InitModuleCount := 0;
 ResetModuleCount := 0;
-TaskModuleCount := 0;
+_TaskModuleCount := 0;
 AbortModuleCount := 0;
 InitialisationCount := 0;
 ObjectCount := 0;
@@ -373,7 +373,7 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Task <> 0 AND_THEN ObjectRunner.TaskModuleCount < (MaxRegisteredModules + 1) THEN
+        <ST><![CDATA[IF Task <> 0 AND_THEN _TaskModuleCount < (MaxRegisteredModules + 1) THEN
 	Registered := FALSE;
 	FOR i := 0 TO MaxRegisteredModules DO
 		IF TaskModules[i] = Task THEN
@@ -384,7 +384,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF TaskModules[i] = 0 THEN
 				TaskModules[i] := Task;
-				ObjectRunner.TaskModuleCount := ObjectRunner.TaskModuleCount + 1;
+				_TaskModuleCount := _TaskModuleCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
@@ -421,14 +421,16 @@ END_VAR
         <ST><![CDATA[ResetableModuleCount := ResetModuleCount;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TaskModuleCount" Id="{1f04fa34-f4be-43a4-b600-de22cc592d9f}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD TaskModuleCount : INT
-VAR_INPUT
+    <Property Name="TaskModuleCount" Id="{927cafff-fdb5-47b3-94f2-4fc8a6775a47}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY TaskModuleCount : INT]]></Declaration>
+      <Get Name="Get" Id="{dc8ebca7-9aee-4cbd-88f7-027f5ef5ec93}">
+        <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[super^.TaskModuleCount := ObjectRunner.TaskModuleCount;]]></ST>
-      </Implementation>
-    </Method>
+        <Implementation>
+          <ST><![CDATA[TaskModuleCount := _TaskModuleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>
