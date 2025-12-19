@@ -27,7 +27,7 @@ END_VAR
     <Method Name="RegisterObject" Id="{dd3d0223-46c8-4aa6-809a-31ad560b377a}">
       <Declaration><![CDATA[METHOD RegisterObject : HRESULT
 VAR_INPUT
-	Registerable : I_Object;
+	Object : I_Object;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="RegisterResettable" Id="{04daf7da-6efd-45f8-8b64-3bc15c24a64f}">

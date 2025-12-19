@@ -6,40 +6,24 @@
     <Method Name="Abort" Id="{68d1c22b-b062-4ba5-af4e-be1c5aac2012}">
       <Declaration><![CDATA[METHOD Abort : BOOL
 VAR_INPUT
-END_VAR
-VAR	
-	i: INT;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     </Method>
     <Method Name="Cycle" Id="{d3354a45-fc19-4351-8bac-e55f3d6a6b07}">
       <Declaration><![CDATA[METHOD PUBLIC  Cycle : HRESULT
 VAR_INPUT
-END_VAR
-VAR	
-	i: INT;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="DeregisterAll" Id="{f20f0940-9007-494f-b22e-4edfda01c380}">
       <Declaration><![CDATA[METHOD DeregisterAll : HRESULT
 VAR_INPUT
-END_VAR
-VAR	
-	i: INT;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="Initialise" Id="{de761ae2-8c67-469f-9061-c94caa53bd35}">
       <Declaration><![CDATA[METHOD Initialise : HRESULT
-VAR
-	i : INT;
-END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="Initialise_Ordered" Id="{3fecbf72-28eb-4bcc-8029-8c43c7eea37a}">
       <Declaration><![CDATA[METHOD Initialise_Ordered : HRESULT
-VAR
-	i : INT;
-END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="Register" Id="{ca4bbc38-0945-478e-81fb-76a0575d0031}">
@@ -52,9 +36,6 @@ END_VAR
     <Method Name="Reset" Id="{63e64e98-d635-4279-a162-64cc55a71604}">
       <Declaration><![CDATA[METHOD Reset : HRESULT
 VAR_INPUT
-END_VAR
-VAR	
-	i: INT;
 END_VAR]]></Declaration>
     </Method>
   </Itf>
