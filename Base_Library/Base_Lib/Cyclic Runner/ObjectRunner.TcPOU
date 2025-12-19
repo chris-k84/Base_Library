@@ -13,7 +13,7 @@ VAR
 	_InitModuleCount : INT := 0;
 	_ResetModuleCount : INT := 0;
 	_TaskModuleCount : INT := 0;
-	AbortModuleCount: INT := 0;
+	_AbortModuleCount: INT := 0;
 	InitialisationCount : INT := 0;
 	ObjectCount : INT := 0;
 	Registered: BOOL;
@@ -38,22 +38,24 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO AbortModuleCount - 1 DO
+        <ST><![CDATA[FOR i := 0 TO _AbortModuleCount - 1 DO
 	IF AbortableModules[i] <> 0 THEN
 		AbortableModules[i].Abort();
 	END_IF
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <Method Name="AbortableModuleCount" Id="{3ae76c70-4548-4df5-acc2-e0eea77bf80c}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD AbortableModuleCount : INT
-VAR_INPUT
+    <Property Name="AbortableModuleCount" Id="{23db9944-fbae-4d78-bb90-3912c275f64a}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY AbortableModuleCount : INT]]></Declaration>
+      <Get Name="Get" Id="{911687f1-a3c7-48f3-b680-34f1a512f575}">
+        <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[AbortableModuleCount := AbortModuleCount;]]></ST>
-      </Implementation>
-    </Method>
+        <Implementation>
+          <ST><![CDATA[AbortableModuleCount := _AbortModuleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Cycle" Id="{07b170dc-1426-48b0-b328-82870c7027f5}" FolderPath="Commands\">
       <Declaration><![CDATA[METHOD PUBLIC  Cycle : HRESULT
 VAR_INPUT
@@ -100,7 +102,7 @@ _CyclicModuleCount := 0;
 _InitModuleCount := 0;
 _ResetModuleCount := 0;
 _TaskModuleCount := 0;
-AbortModuleCount := 0;
+_AbortModuleCount := 0;
 InitialisationCount := 0;
 ObjectCount := 0;
 DeregisterAll := 1;
@@ -206,7 +208,7 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Abortable <> 0 AND_THEN AbortModuleCount < (MaxRegisteredModules + 1) THEN
+        <ST><![CDATA[IF Abortable <> 0 AND_THEN _AbortModuleCount < (MaxRegisteredModules + 1) THEN
 	Registered := FALSE;
 	FOR i := 0 TO MaxRegisteredModules DO
 		IF AbortableModules[i] = Abortable THEN
@@ -217,7 +219,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF AbortableModules[i] = 0 THEN
 				AbortableModules[i] := Abortable;
-				AbortModuleCount := AbortModuleCount + 1;
+				_AbortModuleCount := _AbortModuleCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
