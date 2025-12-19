@@ -9,7 +9,7 @@ VAR
 	ResetableModules : ARRAY[0..MaxRegisteredModules] OF I_Resettable;
 	AbortableModules : ARRAY[0..MaxRegisteredModules] OF I_Abortable;
 	TaskModules : ARRAY[0..MaxRegisteredModules] OF I_Task;
-	CyclicModuleCount : INT := 0;
+	_CyclicModuleCount : INT := 0;
 	InitModuleCount : INT := 0;
 	ResetModuleCount : INT := 0;
 	TaskModuleCount : INT := 0;
@@ -62,22 +62,24 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO ObjectRunner.CyclicModuleCount -1 DO
+        <ST><![CDATA[FOR i := 0 TO _CyclicModuleCount -1 DO
 	IF CyclicModules[i] <> 0 THEN
 		CyclicModules[i].Cycle();
 	END_IF
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <Method Name="CyclicModuleCount" Id="{ce16b2d3-0e8a-4df6-aa9c-1c1b403838ba}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD CyclicModuleCount : INT
-VAR_INPUT
+    <Property Name="CyclicModuleCount" Id="{ccef38f5-805e-4d03-bb17-c72ca8649e55}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY CyclicModuleCount : INT]]></Declaration>
+      <Get Name="Get" Id="{4bb76778-169d-40b0-88a7-143b8bc4095e}">
+        <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[super^.CyclicModuleCount := ObjectRunner.CyclicModuleCount;]]></ST>
-      </Implementation>
-    </Method>
+        <Implementation>
+          <ST><![CDATA[CyclicModuleCount := _CyclicModuleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="DeregisterAll" Id="{801399c7-4ed5-4baa-bb84-25ca1ab9b024}" FolderPath="Register\">
       <Declaration><![CDATA[METHOD DeregisterAll : HRESULT
 VAR_INPUT
@@ -94,7 +96,7 @@ END_VAR]]></Declaration>
 	AbortableModules[i] := 0;
 	TaskModules[i] := 0;
 END_FOR
-ObjectRunner.CyclicModuleCount := 0;
+_CyclicModuleCount := 0;
 InitModuleCount := 0;
 ResetModuleCount := 0;
 ObjectRunner.TaskModuleCount := 0;
@@ -235,7 +237,7 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Cyclic <> 0 AND_THEN ObjectRunner.CyclicModuleCount < (MaxRegisteredModules + 1) THEN
+        <ST><![CDATA[IF Cyclic <> 0 AND_THEN _CyclicModuleCount < (MaxRegisteredModules + 1) THEN
 	Registered := FALSE;
 	FOR i := 0 TO MaxRegisteredModules DO
 		IF CyclicModules[i] = Cyclic THEN
@@ -246,7 +248,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF CyclicModules[i] = 0 THEN
 				CyclicModules[i] := Cyclic;
-				ObjectRunner.CyclicModuleCount := ObjectRunner.CyclicModuleCount + 1;
+				_CyclicModuleCount := _CyclicModuleCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
