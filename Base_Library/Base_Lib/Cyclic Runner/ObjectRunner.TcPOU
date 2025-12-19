@@ -10,7 +10,7 @@ VAR
 	AbortableModules : ARRAY[0..MaxRegisteredModules] OF I_Abortable;
 	TaskModules : ARRAY[0..MaxRegisteredModules] OF I_Task;
 	_CyclicModuleCount : INT := 0;
-	InitModuleCount : INT := 0;
+	_InitModuleCount : INT := 0;
 	ResetModuleCount : INT := 0;
 	TaskModuleCount : INT := 0;
 	AbortModuleCount: INT := 0;
@@ -97,9 +97,9 @@ END_VAR]]></Declaration>
 	TaskModules[i] := 0;
 END_FOR
 _CyclicModuleCount := 0;
-InitModuleCount := 0;
+_InitModuleCount := 0;
 ResetModuleCount := 0;
-ObjectRunner.TaskModuleCount := 0;
+TaskModuleCount := 0;
 AbortModuleCount := 0;
 InitialisationCount := 0;
 ObjectCount := 0;
@@ -107,15 +107,17 @@ DeregisterAll := 1;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="InitialisableModuleCount" Id="{a9fb930d-907c-4894-834e-3a7f560764dd}" FolderPath="Status\">
-      <Declaration><![CDATA[METHOD InitialisableModuleCount : INT
-VAR_INPUT
+    <Property Name="InitialisableModuleCount" Id="{3f6be28f-ca81-445b-af93-4b3db5303528}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY InitialisableModuleCount : INT]]></Declaration>
+      <Get Name="Get" Id="{58d29d2c-9cdb-47e5-bbde-02379ba5bae8}">
+        <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[InitialisableModuleCount := InitModuleCount;]]></ST>
-      </Implementation>
-    </Method>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="InitialisationComplete" Id="{3a3243ae-75f8-4340-b115-e3e0f0db0c51}" FolderPath="Status\">
       <Declaration><![CDATA[PROPERTY InitialisationComplete : BOOL]]></Declaration>
       <Get Name="Get" Id="{02e0512c-81a3-4e4a-9c6e-fed6ad11ffe2}">
@@ -134,13 +136,13 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF InitModuleCount = 0 THEN
+        <ST><![CDATA[IF _InitModuleCount = 0 THEN
 	_AllInitialised := TRUE;
 	RETURN; 
 END_IF
 
 _AllInitialised := TRUE;
-FOR i := 0 TO InitModuleCount DO
+FOR i := 0 TO _InitModuleCount DO
 	IF InitialiseModules[i] <> 0 THEN 
 		IF NOT InitialiseModules[i].Initialised THEN
 			InitialiseModules[i].Initialise();
@@ -158,7 +160,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF InitModuleCount = 0 THEN
+        <ST><![CDATA[IF _InitModuleCount = 0 THEN
 	_AllInitialised := TRUE;
 	RETURN; 
 END_IF
@@ -271,7 +273,7 @@ VAR
 	i: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Initialisable <> 0 AND_THEN InitModuleCount < (MaxRegisteredModules + 1) THEN
+        <ST><![CDATA[IF Initialisable <> 0 AND_THEN _InitModuleCount < (MaxRegisteredModules + 1) THEN
 	Registered := FALSE;
 	FOR i := 0 TO MaxRegisteredModules DO
 		IF InitialiseModules[i] = Initialisable THEN
@@ -282,7 +284,7 @@ END_VAR]]></Declaration>
 		FOR i := 0 TO MaxRegisteredModules DO
 			IF InitialiseModules[i] = 0 THEN
 				InitialiseModules[i] := Initialisable;
-				InitModuleCount := InitModuleCount + 1;
+				_InitModuleCount := _InitModuleCount + 1;
 				EXIT;
 			END_IF
 		END_FOR
