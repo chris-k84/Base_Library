@@ -4,7 +4,7 @@
     <Declaration><![CDATA[INTERFACE I_RunObjects
 ]]></Declaration>
     <Method Name="Abort" Id="{68d1c22b-b062-4ba5-af4e-be1c5aac2012}">
-      <Declaration><![CDATA[METHOD Abort : BOOL
+      <Declaration><![CDATA[METHOD Abort : HRESULT
 VAR_INPUT
 END_VAR]]></Declaration>
     </Method>
