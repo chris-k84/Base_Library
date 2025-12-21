@@ -196,12 +196,13 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Registerable <> 0 THEN
-	Registerable.RegisterWithParent(THIS^);
-	Register := 1;
-ELSE
+        <ST><![CDATA[IF Registerable = 0 THEN
 	Register := -1;
-END_IF]]></ST>
+	RETURN;
+END_IF
+
+Registerable.RegisterWithParent(THIS^);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="RegisterAbortable" Id="{165e2b31-24e6-4099-863d-0a046dfe15b7}" FolderPath="Register\">
