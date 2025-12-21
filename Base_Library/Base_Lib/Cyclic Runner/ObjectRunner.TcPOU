@@ -121,7 +121,7 @@ DeregisterAll := 1;
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[InitialisableModuleCount := _InitModuleCount;]]></ST>
         </Implementation>
       </Get>
     </Property>
