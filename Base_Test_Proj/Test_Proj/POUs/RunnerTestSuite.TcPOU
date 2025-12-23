@@ -50,17 +50,17 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner;
-	TestMockObj1 : MockCyclic;
-	TestMockObj2 : MockCyclic;
+	TestMockObj1 : MockObject;
+	TestMockObj2 : MockObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	Expected := 0;
 	TestRunner.Register(TestMockObj1);
 	TestRunner.Register(TestMockObj2);
-	Actual := TestRunner.CyclicModuleCount;
+	Actual := TestRunner.RegisteredObjectCount;
 	TestRunner.DeregisterAll();
-	Actual := TestRunner.CyclicModuleCount;
+	Actual := TestRunner.RegisteredObjectCount;
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 END_IF]]></ST>
       </Implementation>
@@ -73,7 +73,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner;
-	TestMockObj : MockCyclic;
+	TestMockObj : MockInit;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -92,12 +92,12 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner;
-	TestMockObj : MockCyclic;
+	TestMockObj : MockObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	TestRunner.Register(TestMockObj);
-	Actual := TestRunner.CyclicModuleCount;
+	Actual := TestRunner.RegisteredObjectCount;
 	TestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 	TestRunner.DeregisterAll();
 END_IF]]></ST>
@@ -111,7 +111,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner;
-	TestMockObj : MockCyclic;
+	TestMockObj : MockObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -166,7 +166,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner;
-	TestMockObj : MockCyclic;
+	TestMockObj : MockObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF TestSuite.Test(__POUNAME()).ExecuteTest() THEN

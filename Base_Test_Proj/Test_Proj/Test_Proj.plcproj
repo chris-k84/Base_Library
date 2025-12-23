@@ -18,6 +18,9 @@
     <LibraryReferences>{185abf2c-312a-418f-ad94-5bfda8c4b17c}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Mocks\MockObject.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Mocks\MockCyclic.TcPOU">
       <SubType>Code</SubType>
     </Compile>
