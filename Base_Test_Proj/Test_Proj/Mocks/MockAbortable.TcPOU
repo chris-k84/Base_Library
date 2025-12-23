@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MockAbortable" Id="{a3a08092-5752-4e7b-aa34-7940d1bedfee}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK MockAbortable IMPLEMENTS I_Abortable, I_Object
+VAR
+	_isRegistered : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Abort" Id="{a05f445d-bf80-4bb4-bca8-4dc23e0ac783}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD Abort : Base_Library.HRESULT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="IsRegistered" Id="{af0b5ed4-894f-4e18-8c38-e6f757d31458}">
+      <Declaration><![CDATA[METHOD IsRegistered : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IsRegistered := _isRegistered;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RegisterWithParent" Id="{06e7efa5-26d0-4737-a95a-25426fc72b67}">
+      <Declaration><![CDATA[METHOD RegisterWithParent
+VAR_INPUT
+	Parent	: I_HostObjects;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _isRegistered THEN
+	IF SUCCEEDED(Parent.RegisterAbortable(THIS^)) THEN
+		_isRegistered := TRUE;
+	ELSE
+		_isRegistered := FALSE;
+	END_IF
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

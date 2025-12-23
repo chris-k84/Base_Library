@@ -9,7 +9,7 @@
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>Test_Proj</Name>
-    <ProgramVersion>3.1.4026.19</ProgramVersion>
+    <ProgramVersion>3.1.4026.20</ProgramVersion>
     <Application>{028da741-97b3-4893-bd08-fcc77be559ce}</Application>
     <TypeSystem>{6f5b5d5f-4e80-43ec-bce0-42425203c0ad}</TypeSystem>
     <Implicit_Task_Info>{a3b5ac5f-8a52-44ec-823e-704d913127f0}</Implicit_Task_Info>
@@ -18,13 +18,22 @@
     <LibraryReferences>{185abf2c-312a-418f-ad94-5bfda8c4b17c}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Mocks\MockCyclic.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mocks\MockInit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mocks\MockAbortable.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mocks\MockResettable.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MockObj.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\RunnerTestSuite.TcPOU">
@@ -32,6 +41,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Mocks" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +142,12 @@
             <v>DisabledWarningIds</v>
             <v>410,5410</v>
           </d>
+        </o>
+        <v>{eeeeeeee-3909-4298-8022-501ac3238667}</v>
+        <o>
+          <v n="Name">"{eeeeeeee-3909-4298-8022-501ac3238667}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
         </o>
         <v>{F66C7017-BDD8-4114-926C-81D6D687E35F}</v>
         <o>

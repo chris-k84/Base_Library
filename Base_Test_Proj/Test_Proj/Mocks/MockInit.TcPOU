@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="MockObj" Id="{459c9319-db86-4d6a-b774-a97d62f0aee0}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK MockObj IMPLEMENTS I_Cyclic, I_Initialisable, I_Object, I_Resettable
+  <POU Name="MockInit" Id="{ea0d0635-4bc8-4e40-bb70-64fdc548ef76}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK MockInit IMPLEMENTS I_Initialisable, I_Object
 VAR
 	_isRegistered : BOOL;
 END_VAR
@@ -9,25 +9,18 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="Cycle" Id="{2fdaa782-1cce-42d3-b0fd-0a553501ea73}">
-      <Declaration><![CDATA[METHOD Cycle : HRESULT
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Initialise" Id="{b6fb438d-078a-4d9d-ba13-f31f733124cc}">
+    <Method Name="Initialise" Id="{93202d8c-ca65-49f4-bc1a-ba79c2f00c97}">
       <Declaration><![CDATA[METHOD Initialise : HRESULT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Initialised" Id="{9ccefc82-4611-4153-984f-16110f1bc2dd}">
+    <Property Name="Initialised" Id="{8eca6b5f-e7d9-48fd-a262-c4eb08cb3a85}">
       <Declaration><![CDATA[{warning 'Add property implementation'}
 PROPERTY Initialised : BOOL
 ]]></Declaration>
-      <Get Name="Get" Id="{704bdb38-63cd-4146-9195-7eb236f2d453}">
+      <Get Name="Get" Id="{b0a04522-1f9a-44e9-8852-891b0f1a43ae}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -36,7 +29,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="IsRegistered" Id="{432ff809-df19-4dfc-b853-62c50ce79958}">
+    <Method Name="IsRegistered" Id="{0cc4c4a8-8a78-4ee1-b5e7-9370aa13080b}">
       <Declaration><![CDATA[METHOD IsRegistered : BOOL
 VAR_INPUT
 END_VAR
@@ -45,7 +38,7 @@ END_VAR
         <ST><![CDATA[IsRegistered := _isRegistered;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="RegisterWithParent" Id="{53309e55-7b39-4961-93ff-498d9c30e110}">
+    <Method Name="RegisterWithParent" Id="{8a07062e-82db-456a-9ee2-ded9fd286a71}">
       <Declaration><![CDATA[METHOD RegisterWithParent
 VAR_INPUT
 	Parent	: I_HostObjects;
@@ -53,7 +46,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _isRegistered THEN
-	IF SUCCEEDED( Parent.RegisterCyclic(THIS^)) AND SUCCEEDED(Parent.RegisterInitialisable(THIS^)) THEN
+	IF SUCCEEDED(Parent.RegisterInitialisable(THIS^)) THEN
 		_isRegistered := TRUE;
 	ELSE
 		_isRegistered := FALSE;
@@ -61,13 +54,6 @@ END_VAR
 END_IF
 
 ]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Reset" Id="{fdee9a2d-cec1-4e56-8d77-d56933a1dff5}">
-      <Declaration><![CDATA[METHOD Reset : Base_Library.HRESULT
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>

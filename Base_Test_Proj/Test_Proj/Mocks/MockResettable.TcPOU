@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MockResettable" Id="{67982418-1fe2-4e79-a8c0-e8754cff9aa1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK MockResettable IMPLEMENTS I_Resettable, I_Object
+VAR
+	_isRegistered : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="IsRegistered" Id="{ff687a51-0cb0-434f-a789-f93048405b3c}">
+      <Declaration><![CDATA[METHOD IsRegistered : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IsRegistered := _isRegistered;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RegisterWithParent" Id="{deccf2f8-074a-48c7-b313-f7a823ef95ac}">
+      <Declaration><![CDATA[METHOD RegisterWithParent
+VAR_INPUT
+	Parent	: I_HostObjects;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _isRegistered THEN
+	IF SUCCEEDED( Parent.RegisterResettable(THIS^)) THEN
+		_isRegistered := TRUE;
+	ELSE
+		_isRegistered := FALSE;
+	END_IF
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{1234c94a-2dee-47aa-a9a9-8e6b9ea31d76}">
+      <Declaration><![CDATA[METHOD Reset : Base_Library.HRESULT
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
