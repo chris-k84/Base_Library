@@ -10,8 +10,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Abort" Id="{a05f445d-bf80-4bb4-bca8-4dc23e0ac783}">
-      <Declaration><![CDATA[{warning 'Add method implementation '}
-METHOD Abort : Base_Library.HRESULT
+      <Declaration><![CDATA[METHOD Abort : Base_Library.HRESULT
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
