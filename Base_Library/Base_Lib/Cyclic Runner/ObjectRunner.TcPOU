@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="ObjectRunner" Id="{4adb75ec-914c-46a2-96a4-b49d6ed1e005}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ObjectRunner IMPLEMENTS I_Cyclic, I_HostObjects, I_RunObjects
+    <Declaration><![CDATA[FUNCTION_BLOCK ObjectRunner 
+VAR_GENERIC CONSTANT
+	MaxRegisteredModules : INT := 99;
+END_VAR IMPLEMENTS I_Cyclic, I_HostObjects, I_RunObjects
 VAR
 	Objects : ARRAY[0..MaxRegisteredModules] OF I_Object;
 	CyclicModules : ARRAY[0..MaxRegisteredModules] OF I_Cyclic;
@@ -18,11 +21,7 @@ VAR
 	InitialisationCount : INT := 0;
 	Registered: BOOL;
 	_AllInitialised : BOOL := TRUE;
-END_VAR
-VAR CONSTANT
-	MaxRegisteredModules : INT := 99;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -219,7 +218,7 @@ END_VAR]]></Declaration>
 	RETURN;
 END_IF
 
-IF _AbortModuleCount > MaxRegisteredModules THEN
+IF _AbortModuleCount >= MaxRegisteredModules THEN
 	RegisterAbortable := -2;
 	RETURN;
 END_IF
@@ -261,7 +260,7 @@ END_VAR]]></Declaration>
 	RETURN;
 END_IF
 
-IF _CyclicModuleCount > MaxRegisteredModules THEN
+IF _CyclicModuleCount >= MaxRegisteredModules THEN
 	RegisterCyclic := -2;
 	RETURN;
 END_IF
@@ -313,7 +312,7 @@ END_VAR]]></Declaration>
 	RETURN;
 END_IF
 
-IF _InitModuleCount > MaxRegisteredModules THEN
+IF _InitModuleCount >= MaxRegisteredModules THEN
 	RegisterInitialisable := -2;
 	RETURN;
 END_IF
@@ -354,7 +353,7 @@ END_VAR]]></Declaration>
 	RETURN;
 END_IF
 
-IF _ObjectCount > MaxRegisteredModules THEN
+IF _ObjectCount >= MaxRegisteredModules THEN
 	RegisterObject := -2;
 	RETURN;
 END_IF
@@ -394,7 +393,7 @@ END_VAR]]></Declaration>
 	RETURN;
 END_IF
 
-IF _ResetModuleCount > MaxRegisteredModules THEN
+IF _ResetModuleCount >= MaxRegisteredModules THEN
 	RegisterResettable := -2;
 	RETURN;
 END_IF
@@ -434,7 +433,7 @@ END_VAR]]></Declaration>
 	RETURN;
 END_IF
 
-IF _TaskModuleCount > MaxRegisteredModules THEN
+IF _TaskModuleCount >= MaxRegisteredModules THEN
 	RegisterTask := -2;
 	RETURN;
 END_IF
