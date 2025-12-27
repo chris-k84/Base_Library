@@ -15,11 +15,21 @@ IncrementCyclicCountWhenAdded_Test();
 IncrementInitObjCountWhenAdded_Test();
 IncrementObjectCountWhenAdded_Test();
 IncrementResetCountWhenAdded_Test();
+RejectAddingNullAbort_Test();
+RejectAddingNullCyclic_Test();
+RejectAddingNullInit_Test();
+RejectAddingNullObj_Test();
+RejectAddingNullReset_Test();
 RejectAddingSameAbort_Test();
 RejectAddingSameCyclic_Test();
 RejectAddingSameInit_Test();
 RejectAddingSameObj_Test();
 RejectAddingSameReset_Test();
+RejectAddingTooManyAbort_Test();
+RejectAddingTooManyCyclic_Test();
+RejectAddingTooManyInit_Test();
+RejectAddingTooManyObj_Test();
+RejectAddingTooManyReset_Test();
 RejectInitCallWithNoModules_Test();
 RejectInvalidInterface_Test();
 RunnerAcceptsModule_Test();
@@ -35,7 +45,7 @@ VAR_INST
 	Actual	 : BOOL;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockInit;
 END_VAR]]></Declaration>
       <Implementation>
@@ -57,7 +67,7 @@ VAR_INST
 	Actual	 : INT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj1 : MockObject;
 	TestMockObj2 : MockObject;
 END_VAR]]></Declaration>
@@ -80,7 +90,7 @@ VAR_INST
 	Actual	 : INT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockAbortable;
 END_VAR
 ]]></Declaration>
@@ -100,7 +110,7 @@ VAR_INST
 	Actual	 : INT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockCyclic;
 END_VAR]]></Declaration>
       <Implementation>
@@ -119,7 +129,7 @@ VAR_INST
 	Actual	 : INT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockInit;
 END_VAR]]></Declaration>
       <Implementation>
@@ -138,7 +148,7 @@ VAR_INST
 	Actual	 : INT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockObject;
 END_VAR]]></Declaration>
       <Implementation>
@@ -157,7 +167,7 @@ VAR_INST
 	Actual	 : INT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockResettable;
 END_VAR
 ]]></Declaration>
@@ -170,20 +180,110 @@ END_VAR
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="RejectAddingNullAbort_Test" Id="{2593bd85-466f-4f2a-81e6-57d1ef861be1}">
+      <Declaration><![CDATA[METHOD RejectAddingNullAbort_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -1;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<99>;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	Actual :=  TestRunner.RegisterAbortable(16#00);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingNullCyclic_Test" Id="{f55bd571-9934-46b8-b897-0aa1f67e632e}">
+      <Declaration><![CDATA[METHOD RejectAddingNullCyclic_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -1;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<99>;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	Actual :=  TestRunner.RegisterCyclic(16#00);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingNullInit_Test" Id="{451dd696-ffdc-48b3-9b5d-4201d36f6e5f}">
+      <Declaration><![CDATA[METHOD RejectAddingNullInit_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -1;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<99>;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	Actual :=  TestRunner.RegisterInitialisable(16#00);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingNullObj_Test" Id="{74e3422f-f16d-44a2-aa8e-c6d6e896b535}">
+      <Declaration><![CDATA[METHOD RejectAddingNullObj_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -1;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<99>;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	Actual :=  TestRunner.RegisterObject(16#00);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingNullReset_Test" Id="{40657bcf-6ecf-476e-b23a-baf673764e2b}">
+      <Declaration><![CDATA[METHOD RejectAddingNullReset_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -1;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<99>;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	Actual :=  TestRunner.RegisterResettable(16#00);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="RejectAddingSameAbort_Test" Id="{409af944-1d9d-43e1-8962-22fede08b6f5}">
       <Declaration><![CDATA[METHOD RejectAddingSameAbort_Test : BOOL
 VAR_INST
-	Expected : BOOL := TRUE;
-	Actual	 : BOOL;
+	Expected : HRESULT := -3;
+	Actual	 : HRESULT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockAbortable;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	TestRunner.RegisterAbortable(TestMockObj);
-	Actual :=  FAILED(TestRunner.RegisterAbortable(TestMockObj));
+	Actual :=  TestRunner.RegisterAbortable(TestMockObj);
 	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 	TestRunner.DeregisterAll();
 END_IF]]></ST>
@@ -192,17 +292,17 @@ END_IF]]></ST>
     <Method Name="RejectAddingSameCyclic_Test" Id="{f80324e8-9c0d-473b-bb46-ca83edbbde52}">
       <Declaration><![CDATA[METHOD RejectAddingSameCyclic_Test : BOOL
 VAR_INST
-	Expected : BOOL := TRUE;
-	Actual	 : BOOL;
+	Expected : HRESULT := -3;
+	Actual	 : HRESULT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockCyclic;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	TestRunner.RegisterCyclic(TestMockObj);
-	Actual := FAILED(TestRunner.RegisterCyclic(TestMockObj));
+	Actual := TestRunner.RegisterCyclic(TestMockObj);
 	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 	TestRunner.DeregisterAll();
 END_IF]]></ST>
@@ -211,17 +311,17 @@ END_IF]]></ST>
     <Method Name="RejectAddingSameInit_Test" Id="{5db42e33-7d7b-4d2f-b412-a3140bd84846}">
       <Declaration><![CDATA[METHOD RejectAddingSameInit_Test : BOOL
 VAR_INST
-	Expected : BOOL := TRUE;
-	Actual	 : BOOL;
+	Expected : HRESULT := -3;
+	Actual	 : HRESULT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockInit;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	TestRunner.RegisterInitialisable(TestMockObj);
-	Actual := FAILED(TestRunner.RegisterInitialisable(TestMockObj));
+	Actual := TestRunner.RegisterInitialisable(TestMockObj);
 	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 	TestRunner.DeregisterAll();
 END_IF]]></ST>
@@ -230,17 +330,17 @@ END_IF]]></ST>
     <Method Name="RejectAddingSameObj_Test" Id="{c962196c-5e81-4f84-9de9-a591b396130d}">
       <Declaration><![CDATA[METHOD RejectAddingSameObj_Test : BOOL
 VAR_INST
-	Expected : BOOL := TRUE;
-	Actual	 : BOOL;
+	Expected : HRESULT := -3;
+	Actual	 : HRESULT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	TestRunner.RegisterObject(TestMockObj);
-	Actual := FAILED(TestRunner.RegisterObject(TestMockObj));
+	Actual := TestRunner.RegisterObject(TestMockObj);
 	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 	TestRunner.DeregisterAll();
 END_IF]]></ST>
@@ -249,17 +349,117 @@ END_IF]]></ST>
     <Method Name="RejectAddingSameReset_Test" Id="{01227d07-1ad2-4fb7-90f3-26f34c3ab995}">
       <Declaration><![CDATA[METHOD RejectAddingSameReset_Test : BOOL
 VAR_INST
-	Expected : BOOL := TRUE;
-	Actual	 : BOOL;
+	Expected : HRESULT := -3;
+	Actual	 : HRESULT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockResettable;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
 	TestRunner.RegisterResettable(TestMockObj);
-	Actual := FAILED(TestRunner.RegisterResettable(TestMockObj));
+	Actual := TestRunner.RegisterResettable(TestMockObj);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingTooManyAbort_Test" Id="{89d0c5fe-838a-4e50-9440-9a1b74dd26d0}">
+      <Declaration><![CDATA[METHOD RejectAddingTooManyAbort_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -2;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<1>;
+	TestMockObj : MockAbortable;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestRunner.RegisterAbortable(TestMockObj);
+	Actual := TestRunner.RegisterAbortable(TestMockObj);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingTooManyCyclic_Test" Id="{a2af9b45-8b29-42b2-a8be-fe1edf74cf55}">
+      <Declaration><![CDATA[METHOD RejectAddingTooManyCyclic_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -2;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<1>;
+	TestMockObj : MockCyclic;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestRunner.RegisterCyclic(TestMockObj);
+	Actual := TestRunner.RegisterCyclic(TestMockObj);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingTooManyInit_Test" Id="{00f0db91-18d1-44e8-9c4b-2a19f99fa521}">
+      <Declaration><![CDATA[METHOD RejectAddingTooManyInit_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -2;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<1>;
+	TestMockObj : MockInit;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestRunner.RegisterInitialisable(TestMockObj);
+	Actual := TestRunner.RegisterInitialisable(TestMockObj);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingTooManyObj_Test" Id="{7a8de932-9e7a-47d4-8877-5179ae8908d9}">
+      <Declaration><![CDATA[METHOD RejectAddingTooManyObj_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -2;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<1>;
+	TestMockObj : MockObject;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestRunner.RegisterObject(TestMockObj);
+	Actual := TestRunner.RegisterObject(TestMockObj);
+	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+	TestRunner.DeregisterAll();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RejectAddingTooManyReset_Test" Id="{34415ecc-ff71-4f9b-bd78-e0fae13b3843}">
+      <Declaration><![CDATA[METHOD RejectAddingTooManyReset_Test : BOOL
+VAR_INST
+	Expected : HRESULT := -2;
+	Actual	 : HRESULT;
+END_VAR
+VAR
+	TestRunner : ObjectRunner<1>;
+	TestMockObj : MockResettable;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestRunner.RegisterResettable(TestMockObj);
+	Actual := TestRunner.RegisterResettable(TestMockObj);
 	RunnerTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
 	TestRunner.DeregisterAll();
 END_IF]]></ST>
@@ -272,7 +472,7 @@ VAR_INST
 	Actual	 : BOOL;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -290,7 +490,7 @@ VAR_INST
 	Actual	 : HRESULT;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -307,7 +507,7 @@ VAR_INST
 	Actual	 : BOOL;
 END_VAR
 VAR
-	TestRunner : ObjectRunner;
+	TestRunner : ObjectRunner<99>;
 	TestMockObj : MockObject;
 END_VAR]]></Declaration>
       <Implementation>
