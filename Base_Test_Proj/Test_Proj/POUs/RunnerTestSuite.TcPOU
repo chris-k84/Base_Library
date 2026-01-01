@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK RunnerTestSuite
 VAR
 	ReRun : BOOL;
-	RunnerTestSuite : TestSuite<TestSuiteParameter.MaxTestCount>(TestSuiteParameter.DefaultPath) := (TestSuiteName := 'Runner Test Suite');
+	RunnerTestSuite : TestSuite<TestSuiteParameter.MaxTestCount>('C:\ProgramData\Beckhoff\TwinCAT\3.1\Boot\Runner_Tests.xml') := (TestSuiteName := 'Runner Test Suite');
 END_VAR
 ]]></Declaration>
     <Implementation>
