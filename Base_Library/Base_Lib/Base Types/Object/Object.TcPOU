@@ -31,7 +31,7 @@ END_VAR]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[Name := _Name;]]></ST>
         </Implementation>
       </Get>
     </Property>
