@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="MockObject" Id="{6f8b0af1-76ba-4e84-8c37-25fa8b1ced80}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK MockObject IMPLEMENTS I_Object
+    <Declaration><![CDATA[FUNCTION_BLOCK MockObject EXTENDS Object
 VAR
 	_isRegistered : BOOL;
 END_VAR

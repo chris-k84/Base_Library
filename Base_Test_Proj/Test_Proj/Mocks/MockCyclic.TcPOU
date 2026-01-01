@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="MockCyclic" Id="{459c9319-db86-4d6a-b774-a97d62f0aee0}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK MockCyclic IMPLEMENTS I_Cyclic, I_Object
+    <Declaration><![CDATA[FUNCTION_BLOCK MockCyclic EXTENDS CyclicBase
 VAR
 	_isRegistered : BOOL;
 END_VAR

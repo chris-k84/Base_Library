@@ -39,6 +39,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\ObjectTestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\RunnerTestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>

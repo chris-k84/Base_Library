@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="MockAbortable" Id="{a3a08092-5752-4e7b-aa34-7940d1bedfee}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK MockAbortable IMPLEMENTS I_Abortable, I_Object
+    <Declaration><![CDATA[FUNCTION_BLOCK MockAbortable EXTENDS Object IMPLEMENTS I_Abortable
 VAR
 	_isRegistered : BOOL;
 END_VAR

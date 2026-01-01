@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="ObjectTestSuite" Id="{dff4e0f5-e147-4a10-a1c9-bb53cdb042da}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ObjectTestSuite
+VAR
+	ReRun : BOOL;
+	ObjTestSuite : TestSuite<TestSuiteParameter.MaxTestCount>(TestSuiteParameter.DefaultPath) := (TestSuiteName := 'Object Test Suite');
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ObjectAcceptsName_Test();
+IF ReRun THEN
+	ObjTestSuite.ReRunTests();
+	ReRun := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="ObjectAcceptsName_Test" Id="{41bba9a9-9474-43ec-888e-ea41aff17b51}">
+      <Declaration><![CDATA[METHOD ObjectAcceptsName_Test
+VAR_INST
+	Expected : BOOL := TRUE;
+	Actual	 : BOOL;
+END_VAR
+VAR
+	TestMockObj : MockObject(Name := 'Bob');
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF ObjTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	Expected := TRUE;
+	Actual := TestMockObj.Name = 'Bob';
+	ObjTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

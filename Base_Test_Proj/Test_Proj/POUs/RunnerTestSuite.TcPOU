@@ -46,7 +46,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockInit;
+	TestMockObj : MockInit(Name := 'MockInit');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -68,8 +68,8 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj1 : MockObject;
-	TestMockObj2 : MockObject;
+	TestMockObj1 : MockObject(Name := 'MockObj1');
+	TestMockObj2 : MockObject(Name := 'MockObj2');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -91,7 +91,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockAbortable;
+	TestMockObj : MockAbortable(Name := 'MockReset');
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -111,7 +111,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockCyclic;
+	TestMockObj : MockCyclic(Name := 'MockCyclic');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -130,7 +130,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockInit;
+	TestMockObj : MockInit(Name := 'MockInit');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -149,7 +149,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockObject;
+	TestMockObj : MockObject(Name := 'MockObj');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -168,7 +168,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockResettable;
+	TestMockObj : MockResettable(Name := 'MockReset');
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -278,7 +278,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockAbortable;
+	TestMockObj : MockAbortable(Name := 'MockAbort');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -297,7 +297,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockCyclic;
+	TestMockObj : MockCyclic(Name := 'Mockcyclic');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -316,7 +316,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockInit;
+	TestMockObj : MockInit(Name := 'MockInit');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -335,7 +335,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockObject;
+	TestMockObj : MockObject(Name := 'MockObj');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -354,7 +354,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockResettable;
+	TestMockObj : MockResettable(Name := 'MockReset');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
@@ -373,7 +373,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<1>;
-	TestMockObj : MockAbortable;
+	TestMockObj : MockAbortable(Name := 'MockAbort');
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -393,7 +393,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<1>;
-	TestMockObj : MockCyclic;
+	TestMockObj : MockCyclic(Name := 'MockCyclic');
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -413,7 +413,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<1>;
-	TestMockObj : MockInit;
+	TestMockObj : MockInit(Name := 'MockInit');
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -433,7 +433,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<1>;
-	TestMockObj : MockObject;
+	TestMockObj : MockObject(Name := 'MockObj');
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -453,7 +453,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<1>;
-	TestMockObj : MockResettable;
+	TestMockObj : MockResettable(Name := 'MockReset');
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -508,7 +508,7 @@ VAR_INST
 END_VAR
 VAR
 	TestRunner : ObjectRunner<99>;
-	TestMockObj : MockObject;
+	TestMockObj : MockObject(Name := 'MockObj');
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF RunnerTestSuite.Test(__POUNAME()).ExecuteTest() THEN
