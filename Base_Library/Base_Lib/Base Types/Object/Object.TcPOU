@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="Object" Id="{3eef5c14-dd0e-4f43-be11-a2e50aecaa97}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK Object IMPLEMENTS I_Object
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT Object IMPLEMENTS I_Object
 VAR
 	_Name : T_MaxString;
 END_VAR
