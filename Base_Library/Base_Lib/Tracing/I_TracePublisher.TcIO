@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_TracePublisher" Id="{527d72c4-d8e1-4604-87b2-42428273b381}">
+    <Declaration><![CDATA[INTERFACE I_TracePublisher
+]]></Declaration>
+    <Method Name="Subscribe" Id="{893f19fc-463e-439e-a8b0-79ed859ec4ed}">
+      <Declaration><![CDATA[METHOD Subscribe
+VAR_INPUT
+	Logger : I_TraceLogger;
+END_VAR
+
+VAR
+	i : UDINT;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="Unsubscribe" Id="{31120338-b3a2-428f-b659-bf8777f2bc79}">
+      <Declaration><![CDATA[METHOD Unsubscribe
+VAR_INPUT
+	Logger : I_TraceLogger;
+END_VAR
+
+VAR
+	i : UDINT;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
