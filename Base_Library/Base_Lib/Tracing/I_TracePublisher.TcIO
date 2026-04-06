@@ -7,20 +7,12 @@
       <Declaration><![CDATA[METHOD Subscribe
 VAR_INPUT
 	Logger : I_TraceLogger;
-END_VAR
-
-VAR
-	i : UDINT;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="Unsubscribe" Id="{31120338-b3a2-428f-b659-bf8777f2bc79}">
       <Declaration><![CDATA[METHOD Unsubscribe
 VAR_INPUT
 	Logger : I_TraceLogger;
-END_VAR
-
-VAR
-	i : UDINT;
 END_VAR]]></Declaration>
     </Method>
   </Itf>

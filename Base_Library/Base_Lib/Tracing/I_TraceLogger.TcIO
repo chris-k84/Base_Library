@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <Itf Name="I_TraceLogger" Id="{65a75728-6630-458f-a11a-131852730d4e}">
-    <Declaration><![CDATA[INTERFACE I_TraceLogger EXTENDS I_Base]]></Declaration>
+    <Declaration><![CDATA[INTERFACE I_TraceLogger]]></Declaration>
     <Method Name="LogMessage" Id="{bc47b5b5-7e08-47ae-8fbd-08e46e2940aa}">
       <Declaration><![CDATA[METHOD LogMessage
 VAR_INPUT
