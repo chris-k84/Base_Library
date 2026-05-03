@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="Tracing" Id="{6d6dfbcb-8196-4b53-869e-73e70088fc3b}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	Trace : Trace<10> := (TraceLevel := TcEventSeverityExt.Verbose);
+	{attribute 'hide'}
+	AdsLogger : AdsLogger(Trace);
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
