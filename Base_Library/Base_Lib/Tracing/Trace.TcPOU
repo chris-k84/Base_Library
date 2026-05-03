@@ -78,33 +78,6 @@ END_VAR]]></Declaration>
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <Method Name="LogMessage" Id="{9827b115-b117-49e7-a5e7-267f4cf7b4a8}">
-      <Declaration><![CDATA[METHOD LogMessage
-VAR_INPUT
-	Key		  : T_MaxString;
-	Value	  : T_MaxString;
-	SourceId  : UDINT := 0;
-	TimeStamp : ULINT := 0;
-	MessageId : UDINT := 1;
-	Severity  : USINT := 1;
-END_VAR
-
-VAR
-	i : UDINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[FOR i := 0 TO MaxCount DO
-	IF Loggers[i] <> 0 THEN
-		Loggers[i].LogMessage(Key,
-							  Value,
-							  SourceId,
-							  TimeStamp,
-							  MessageId,
-							  Severity);
-	END_IF
-END_FOR]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Subscribe" Id="{90e68624-cfa6-442e-af8f-efcf0bd0ad8c}">
       <Declaration><![CDATA[METHOD Subscribe
 VAR_INPUT
