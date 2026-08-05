@@ -9,7 +9,7 @@
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>Base_Lib</Name>
-    <ProgramVersion>3.1.4026.21</ProgramVersion>
+    <ProgramVersion>3.1.4026.23</ProgramVersion>
     <Application>{d134618d-73de-4709-a3b0-a1888a75c38b}</Application>
     <TypeSystem>{4517a9eb-d6d4-425f-a92d-1f2c972665b9}</TypeSystem>
     <Implicit_Task_Info>{f7d1a971-3353-43eb-9cc4-18a7eec11f59}</Implicit_Task_Info>
@@ -18,8 +18,8 @@
     <LibraryReferences>{52eb7aa0-ba69-491b-908d-c45c4bb81f18}</LibraryReferences>
     <Company>Beckhoff UK</Company>
     <Released>false</Released>
-    <POUsForPropertyAccessIncluded>false</POUsForPropertyAccessIncluded>
-    <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
+    <POUsForPropertyAccessIncluded>true</POUsForPropertyAccessIncluded>
+    <GlobalVersionStructureIncluded>true</GlobalVersionStructureIncluded>
     <Title>Base Library</Title>
     <ProjectVersion>3.1.0.0</ProjectVersion>
     <LibraryCategories>
@@ -72,6 +72,18 @@
     <Compile Include="Cyclic Runner\ObjectRunner.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Project Information\F_GetCompany.TcPOU">
+      <SubType>Code</SubType>
+      <SystemCall>true</SystemCall>
+    </Compile>
+    <Compile Include="Project Information\F_GetTitle.TcPOU">
+      <SubType>Code</SubType>
+      <SystemCall>true</SystemCall>
+    </Compile>
+    <Compile Include="Project Information\F_GetVersion.TcPOU">
+      <SubType>Code</SubType>
+      <SystemCall>true</SystemCall>
+    </Compile>
     <Compile Include="Tracing\AdsLogger.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +106,9 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="Version\Global_Version.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base Types" />
@@ -104,7 +119,9 @@
     <Folder Include="Base Types\Reset_Base" />
     <Folder Include="Base Types\Task_Base" />
     <Folder Include="Cyclic Runner" />
+    <Folder Include="Project Information" />
     <Folder Include="Tracing" />
+    <Folder Include="Version" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Base_Lib.tmc">
