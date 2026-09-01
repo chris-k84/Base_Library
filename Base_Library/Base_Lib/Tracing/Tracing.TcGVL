@@ -6,6 +6,7 @@ VAR_GLOBAL
 	Trace : Trace<10> := (TraceLevel := TcEventSeverityExt.Verbose);
 	{attribute 'hide'}
 	AdsLogger : AdsLogger(Trace);
+	TcEventLogger : EventLogger(Trace);
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

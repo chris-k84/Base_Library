@@ -90,6 +90,9 @@
     <Compile Include="Tracing\AdsLogger.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tracing\EventLogger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tracing\I_Trace.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -139,6 +142,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_EventLogger">
+      <DefaultResolution>Tc3_EventLogger, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_EventLogger</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ProjectExtensions>

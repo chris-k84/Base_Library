@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="EventLogger" Id="{f431a796-dead-4a24-bac8-602996571025}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EventLogger IMPLEMENTS I_TraceLogger
+VAR
+	MessagesThisScan : DINT;
+	Message			 : FB_TcMessage;
+	Source			 : FB_TcSourceInfo;
+	CurrentCycle	 : UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_Init" Id="{e45d7c2d-8add-4746-9f43-06a48bf3d0cc}">
+      <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
+//The return value is not evaluated. For a specific influence, you can also declare the
+//methods explicitly and provide additional code there with the standard initialization
+//code. You can evaluate the return value.
+METHOD FB_Init: BOOL
+VAR_INPUT
+    bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
+    bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)   
+	TracePublisher : I_TracePublisher;	
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TracePublisher.Subscribe(THIS^);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="LogMessage" Id="{b3cb590c-5144-4f03-8f9d-e25c336a0467}">
+      <Declaration><![CDATA[METHOD LogMessage
+VAR_INPUT
+	Key	: T_MaxString;
+	Value	: T_MaxString;
+	SourceId	: UDINT := 0;
+	TimeStamp	: ULINT := 0;
+	MessageId	: UDINT := 1;
+	Severity	: USINT := 1;
+END_VAR
+VAR
+	EventSeverity : TcEventSeverity;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF GETCURTASKINDEXEX() > 0 THEN
+	IF TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleCount <> CurrentCycle THEN
+		CurrentCycle	 := TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleCount;
+		MessagesThisScan := 0;
+	END_IF
+
+	IF NOT (MessagesThisScan < TO_DINT(TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleTime / 2000)) THEN
+		RETURN;
+	END_IF
+END_IF
+
+CASE Severity OF
+	0: 
+		EventSeverity := TcEventSeverity.Verbose;
+
+	1:
+		EventSeverity := TcEventSeverity.Info;
+
+	2:
+		EventSeverity := TcEventSeverity.Warning;
+
+	3:
+		EventSeverity := TcEventSeverity.Error;
+
+	4:
+		EventSeverity := TcEventSeverity.Critical;
+END_CASE
+
+Source.sName := Key;
+Source.nId	 := SourceId;
+Message.Create(eventClass	:= TC_EVENT_CLASSES.TraceEvents,
+			   nEventId		:= MessageId,
+			   eSeverity	:= EventSeverity,
+			   ipSourceInfo := Source);
+
+Message.ipArguments.Clear().AddString(Value);
+Message.Send(TimeStamp);
+Message.Release();
+Source.Clear();
+MessagesThisScan := MessagesThisScan + 1;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
