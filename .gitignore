@@ -16,9 +16,7 @@ UpgradeLog.htm
 *.tpy
 LineIDs.dbg
 
-!Events_ComponentBase.tmc
-!Events_PackMLBase.tmc
-!Events_Tracing.tmc
+!Events.tmc
 
 ## TwinCAT Archive formats
 *.tnzip

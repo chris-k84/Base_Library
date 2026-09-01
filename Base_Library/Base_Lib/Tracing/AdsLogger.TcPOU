@@ -43,6 +43,10 @@ END_VAR]]></Declaration>
 	MessagesThisScan := 0;
 END_IF
 
+IF NOT (MessagesThisScan < TO_DINT(TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleTime / 2000)) THEN
+	RETURN;
+END_IF
+
 IF MessagesThisScan < TO_DINT(TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleTime / 2000) THEN
 	CASE Severity OF
 		0,1:
