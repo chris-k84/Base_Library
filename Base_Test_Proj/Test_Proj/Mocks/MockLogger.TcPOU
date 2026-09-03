@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MockLogger" Id="{935a9ae7-99c4-4d7b-827e-2cc299904c5b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK MockLogger IMPLEMENTS I_TraceLogger
+VAR
+	_CallCount : UINT;
+	_LastSource : T_MaxString;
+	_LastMessage : T_MaxString;
+	_LastSeverity : UINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="CallCount" Id="{0ff265de-654f-4905-803d-b3ce4350e914}">
+      <Declaration><![CDATA[PROPERTY CallCount : UINT]]></Declaration>
+      <Get Name="Get" Id="{52d92ede-2d3d-4757-a13a-85da389f246d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CallCount := _CallCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LastMessage" Id="{c51bb7f5-3cb3-44cd-a88c-9cef155bd592}">
+      <Declaration><![CDATA[PROPERTY LastMessage : T_Maxstring]]></Declaration>
+      <Get Name="Get" Id="{0f1ff1b1-b5ea-46c7-94b0-1bb304f8757b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LastMessage := _LastMessage;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LastSeverity" Id="{8b633f05-ead0-46c7-96da-6dd0ef241d5d}">
+      <Declaration><![CDATA[PROPERTY LastSeverity : UINT]]></Declaration>
+      <Get Name="Get" Id="{2f9784d6-c997-4286-8055-0418e465f54c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LastSeverity := _LastSeverity;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LastSource" Id="{34343b50-6d80-47b9-8442-2ca273213668}">
+      <Declaration><![CDATA[PROPERTY LastSource : T_Maxstring]]></Declaration>
+      <Get Name="Get" Id="{3d25db67-9c70-4815-8de8-b2be1ec087d4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LastSource := _LastSource;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="LogMessage" Id="{4772d697-6dac-4b50-8905-8c66516f5071}">
+      <Declaration><![CDATA[METHOD LogMessage
+VAR_INPUT
+	Key	: Base_Library.T_MaxString;
+	Value	: Base_Library.T_MaxString;
+	SourceId	: UDINT := 0;
+	TimeStamp	: ULINT := 0;
+	MessageId	: UDINT := 1;
+	Severity	: USINT := 1;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_CallCount := _CallCount + 1;
+
+_LastSource := key;
+
+_LastMessage := value;
+
+_LastSeverity := Severity;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

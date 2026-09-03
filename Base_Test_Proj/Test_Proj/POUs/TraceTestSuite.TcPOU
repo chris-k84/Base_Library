@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TraceTestSuite" Id="{7af83f1b-e69c-44aa-aa2e-e756b60f4fa4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TraceTestSuite
+VAR
+	TraceTestSuite : TestSuite<TestSuiteParameter.MaxTestCount>(ResultFile := JUnitResultFile) := (TestSuiteName := 'Runner Test Suite');
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SubscribeAddsLogger();
+UnsubscribeRemovesLogger();
+TraceLevelPropertyReturnsAssignedValue();
+VerboseLogsWhenTraceLevelVerbose();
+VerboseDoesNotLogAbovelVerbose();
+InfoLogsBelowInfoLevel();
+InfoDoesNotLogAboebInfoLevel();
+WarningLogsBelowWarningLevel();
+WarningDoesNotLogAbovebWarningLevel();
+ErrorDoesNotLogAboveErrorLevel();
+ErrorLogsBelowErrorLevel();
+CriticalLogsAtCriticalLevel();
+CriticalLogsBelowCriticalLevel();
+MessageSentToAllSubscribedLoggers();
+InfoForwardsCorrectSeverity();]]></ST>
+    </Implementation>
+    <Method Name="CriticalLogsAtCriticalLevel" Id="{070299ee-fb87-4559-a827-871244cffa45}">
+      <Declaration><![CDATA[METHOD CriticalLogsAtCriticalLevel
+VAR
+	Expected : UINT := 1;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Critical;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Critical('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CriticalLogsBelowCriticalLevel" Id="{80a6705e-a548-435e-a2c9-77cac6b23a3d}">
+      <Declaration><![CDATA[METHOD CriticalLogsBelowCriticalLevel
+VAR
+	Expected : UINT := 1;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.verbose;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Critical('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ErrorDoesNotLogAboveErrorLevel" Id="{c40dd7a6-d575-4781-a749-cebde4597e42}">
+      <Declaration><![CDATA[METHOD ErrorDoesNotLogAboveErrorLevel
+VAR
+	Expected : UINT := 0;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Critical;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Error('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ErrorLogsBelowErrorLevel" Id="{d0b5727e-dfff-42eb-bb85-2f6b98bbc90d}">
+      <Declaration><![CDATA[METHOD ErrorLogsBelowErrorLevel
+VAR
+	Expected : UINT := 1;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.verbose;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Error('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InfoDoesNotLogAboebInfoLevel" Id="{938c4951-e9d6-48a2-87b7-831b32513fb1}">
+      <Declaration><![CDATA[METHOD InfoDoesNotLogAboebInfoLevel
+VAR
+	Expected : UINT := 0;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Warning;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Info('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InfoForwardsCorrectSeverity" Id="{3ca804f1-4c95-4ae7-b7c4-dadaecd8f86b}">
+      <Declaration><![CDATA[METHOD InfoForwardsCorrectSeverity
+VAR
+	Expected : UINT := 1;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Verbose;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Info('TestSource', 'TestMessage');
+	Actual := TestLogger.LastSeverity;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InfoLogsBelowInfoLevel" Id="{ea2e6991-7d7d-490f-92c0-d46492ec1cd2}">
+      <Declaration><![CDATA[METHOD InfoLogsBelowInfoLevel
+VAR
+	Expected : UINT := 1;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.verbose;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Info('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MessageSentToAllSubscribedLoggers" Id="{13c53614-96bc-4cbe-93f8-c1a7dddb57c4}">
+      <Declaration><![CDATA[METHOD MessageSentToAllSubscribedLoggers
+VAR
+	Expected : HRESULT := 2;
+	Actual	 : HRESULT;
+	TestTrace : Trace<2>;
+	TestLogger1 : MockLogger;
+	TestLogger2 : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Verbose;
+	TestTrace.Subscribe(TestLogger1);
+	TestTrace.Subscribe(TestLogger2);
+	TestTrace.Info('Source', 'Message');
+	Actual := TestLogger1.CallCount + TestLogger2.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SubscribeAddsLogger" Id="{8bbc9b4f-b8e8-4bd1-beb6-4848c99d8fea}">
+      <Declaration><![CDATA[METHOD SubscribeAddsLogger
+VAR
+	Expected : UINT := 1;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Verbose;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Info('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TraceLevelPropertyReturnsAssignedValue" Id="{5f8ed7aa-c90a-479d-874a-484f30b0e6b5}">
+      <Declaration><![CDATA[METHOD TraceLevelPropertyReturnsAssignedValue
+VAR
+	TestTrace : Trace<1>;
+	Expected : TcEventSeverityExt := TcEventSeverityExt.Error;
+	Actual	 : TcEventSeverityExt;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Error;
+	Actual := TestTrace.TraceLevel;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UnsubscribeRemovesLogger" Id="{ee336ea7-0ecf-4125-ae07-803b6793c668}">
+      <Declaration><![CDATA[METHOD UnsubscribeRemovesLogger
+VAR
+	Expected : UINT := 0;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Verbose;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Unsubscribe(TestLogger);
+	TestTrace.Info('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="VerboseDoesNotLogAbovelVerbose" Id="{88d80161-37de-4974-97c9-2deb2f9754f6}">
+      <Declaration><![CDATA[METHOD VerboseDoesNotLogAbovelVerbose
+VAR
+	Expected : UINT := 0;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Warning;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Verbose('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="VerboseLogsWhenTraceLevelVerbose" Id="{6be80568-da4c-4766-a7cc-b3c4c1d7e7d1}">
+      <Declaration><![CDATA[METHOD VerboseLogsWhenTraceLevelVerbose
+VAR
+	Expected : UINT := 1;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Verbose;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Verbose('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WarningDoesNotLogAbovebWarningLevel" Id="{de3a1336-f4e4-46f8-b2f6-85dec893cfda}">
+      <Declaration><![CDATA[METHOD WarningDoesNotLogAbovebWarningLevel
+VAR
+	Expected : UINT := 0;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Critical;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Warning('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WarningLogsBelowWarningLevel" Id="{2fa348ba-d200-4cd2-87f3-1e18b51859a0}">
+      <Declaration><![CDATA[METHOD WarningLogsBelowWarningLevel
+VAR
+	Expected : UINT := 1;
+	Actual	 : UINT;
+	TestTrace : Trace<1>;
+	TestLogger : MockLogger;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TraceTestSuite.Test(__POUNAME()).ExecuteTest() THEN
+	TestTrace.TraceLevel := TcEventSeverityExt.Info;
+	TestTrace.Subscribe(TestLogger);
+	TestTrace.Warning('Source', 'Message');
+	Actual := TestLogger.CallCount;
+	TraceTestSuite.Test(__POUNAME()).AssertEqual(Expected, Actual);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

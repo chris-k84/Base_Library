@@ -5,11 +5,13 @@
 VAR
 	RunnerTests : RunnerTestSuite;
 	ObjectTests : ObjectTestSuite;
+	TraceTests : TraceTestSuite;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[RunnerTests();
-ObjectTests();]]></ST>
+ObjectTests();
+TraceTests();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
