@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcModuleClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance2" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2009/05/TcModuleClass" GeneratedBy="TwinCAT XAE Plc">
+  <DataTypes>
+    <DataType>
+      <Name GUID="{7E2883FE-A746-48AD-A298-020D9A6CB7D7}">TraceEvents</Name>
+      <DisplayName TxtId=""><![CDATA[NewEventClass_DisplayText]]></DisplayName>
+      <EventId>
+        <Name Id="1">Trace</Name>
+        <DisplayName TxtId=""><![CDATA[{0}]]></DisplayName>
+        <Severity>Verbose</Severity>
+      </EventId>
+      <Hides>
+        <Hide GUID="{5FB3E19F-9943-4AF8-9B80-855AF5C34CFA}" />
+        <Hide GUID="{B7398277-91AB-400F-9582-FEF0C650F98C}" />
+        <Hide GUID="{C38A5A80-5EB1-4D8C-8D7F-CFAE9C7BC28B}" />
+      </Hides>
+    </DataType>
+  </DataTypes>
+</TcModuleClass>

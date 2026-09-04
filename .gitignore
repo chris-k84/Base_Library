@@ -16,7 +16,9 @@ UpgradeLog.htm
 *.tpy
 LineIDs.dbg
 
+## These TMC files are specifically allowed to transfer eventlogger 
 !Events.tmc
+!ExternalTypes.tmc
 
 ## TwinCAT Archive formats
 *.tnzip
@@ -34,9 +36,7 @@ TrialLicense.tclrs
 # Project Specific files
 ## Folder contains TwinCAT scope data. Should not be source controlled.
 ScopeData
-
 *.tmcRefac
-
 *.library
 
 
